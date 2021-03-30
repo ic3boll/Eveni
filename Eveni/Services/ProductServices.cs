@@ -34,7 +34,8 @@ namespace Web.Services
             //   var asd = _mapper.Map<Product>(user);
             //    var asdd = user;
             var product = _mapper.Map<Product>(productInputModel);
-            _mapper.Map<Product>(user);
+            //_mapper.Map<Product>(user);
+            product.ApplicationUser = user;
          
             // lazy loading bcs i cant find a way to multimap
             var productt = new Product()
