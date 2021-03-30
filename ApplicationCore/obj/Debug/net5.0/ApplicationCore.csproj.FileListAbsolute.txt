@@ -1,0 +1,12 @@
+C:\Project\Eveni\ApplicationCore\bin\Debug\net5.0\ApplicationCore.deps.json
+C:\Project\Eveni\ApplicationCore\bin\Debug\net5.0\ApplicationCore.dll
+C:\Project\Eveni\ApplicationCore\bin\Debug\net5.0\ref\ApplicationCore.dll
+C:\Project\Eveni\ApplicationCore\bin\Debug\net5.0\ApplicationCore.pdb
+C:\Project\Eveni\ApplicationCore\obj\Debug\net5.0\ApplicationCore.GeneratedMSBuildEditorConfig.editorconfig
+C:\Project\Eveni\ApplicationCore\obj\Debug\net5.0\ApplicationCore.AssemblyInfoInputs.cache
+C:\Project\Eveni\ApplicationCore\obj\Debug\net5.0\ApplicationCore.AssemblyInfo.cs
+C:\Project\Eveni\ApplicationCore\obj\Debug\net5.0\ApplicationCore.csproj.CoreCompileInputs.cache
+C:\Project\Eveni\ApplicationCore\obj\Debug\net5.0\ApplicationCore.dll
+C:\Project\Eveni\ApplicationCore\obj\Debug\net5.0\ref\ApplicationCore.dll
+C:\Project\Eveni\ApplicationCore\obj\Debug\net5.0\ApplicationCore.pdb
+C:\Project\Eveni\ApplicationCore\obj\Debug\net5.0\ApplicationCore.csprojAssemblyReference.cache

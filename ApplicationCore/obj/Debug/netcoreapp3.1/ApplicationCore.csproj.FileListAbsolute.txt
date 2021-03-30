@@ -1,0 +1,9 @@
+C:\Project\Eveni\ApplicationCore\bin\Debug\netcoreapp3.1\ApplicationCore.deps.json
+C:\Project\Eveni\ApplicationCore\bin\Debug\netcoreapp3.1\ApplicationCore.dll
+C:\Project\Eveni\ApplicationCore\bin\Debug\netcoreapp3.1\ApplicationCore.pdb
+C:\Project\Eveni\ApplicationCore\obj\Debug\netcoreapp3.1\ApplicationCore.AssemblyInfoInputs.cache
+C:\Project\Eveni\ApplicationCore\obj\Debug\netcoreapp3.1\ApplicationCore.AssemblyInfo.cs
+C:\Project\Eveni\ApplicationCore\obj\Debug\netcoreapp3.1\ApplicationCore.csproj.CoreCompileInputs.cache
+C:\Project\Eveni\ApplicationCore\obj\Debug\netcoreapp3.1\ApplicationCore.dll
+C:\Project\Eveni\ApplicationCore\obj\Debug\netcoreapp3.1\ApplicationCore.pdb
+C:\Project\Eveni\ApplicationCore\obj\Debug\netcoreapp3.1\ApplicationCore.csprojAssemblyReference.cache

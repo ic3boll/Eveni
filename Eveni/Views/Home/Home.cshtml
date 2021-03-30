@@ -1,0 +1,20 @@
+﻿@using Web.ViewModels.Products
+@{
+    var data = (List<ProductViewModel>)ViewData["Products"];
+}
+@foreach (var item in data)
+{
+    <div class="row">
+        <div class="col-sm-6 col-md-3">
+            <div class="thumbnail">
+                <label>Name: </label>
+                <h4>@item.Name </h4>
+                <td>
+                    <a asp-controller="ReceiptMannager" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary">Edit</a>
+                    <a asp-controller="ReceiptMannager" asp-action="Details" asp-route-id="@item.Id" class="btn btn-primary">Details</a>
+                    <a asp-controller="ReceiptMannager" asp-action="Delete" asp-route-id="@item.Id" class="btn btn-primary">Delete</a>
+                </td>
+            </div>
+        </div>
+    </div>
+}
