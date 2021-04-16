@@ -12,7 +12,7 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar ">
             <div class="container">
                 <a class="navbar-brand" asp-controller="Home" asp-action="Home">eVeni</a>
                 <partial name="_LoginPartial" />
@@ -25,25 +25,6 @@
                         <a asp-controller="Fashion" asp-action="Women">Women</a>
                         <a asp-controller="Fashion" asp-action="Men">Men</a>
                         <a asp-controller="Fashion" asp-action="Kid">Kids</a>
-                    </div>
-                </div>
-                <div class="dropdown">
-                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Toys
-                    </button>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a asp-controller="Toy" asp-action="Animal">Animals</a>
-                        <a asp-controller="Toy" asp-action="Kid">Kids</a>
-                    </div>
-                </div>
-                <div class="dropdown">
-                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Electronics
-                    </button>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a asp-controller="Electronic" asp-action="Tv">Tv</a>
-                        <a asp-controller="Electronic" asp-action="Pc">Pc</a>
-                        <a asp-controller="Electronic" asp-action="Other">Others</a>
                     </div>
                 </div>
             </div>

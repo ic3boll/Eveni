@@ -1,12 +1,10 @@
-﻿using ApplicationCore.Entities;
-using AutoMapper;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
-using System.Linq;
+using RestSharp;
+using System;
 using System.Threading.Tasks;
-using Web.Models;
 using Web.Services.Interfaces;
-using Web.ViewModels.Products;
 using Web.ViewModels.Services.Interfaces;
 
 namespace Web.Controllers
@@ -16,24 +14,41 @@ namespace Web.Controllers
         private readonly IViewModelServices _viewModelServices;
         private readonly IProductServices _productServices;
         private readonly IMapper _mapper;
+        private readonly IHttpContextAccessor _httpContextAccessor;
+
         public HomeController(IProductServices productServices,
             IMapper mapper,
-            IViewModelServices viewModelServices)
+            IViewModelServices viewModelServices,
+            IHttpContextAccessor httpContextAccessor)
         {
 
             this._productServices = productServices;
             this._mapper = mapper;
             this._viewModelServices = viewModelServices;
+            this._httpContextAccessor = httpContextAccessor;
         }
         [HttpGet]
-       public async Task<IActionResult> Home()
+        [Obsolete]
+        public async Task<IActionResult> Home()
        {
             var products = await this._productServices.GetAllProducts();
          
               var viewBag = _viewModelServices.SetProductCollection(products);
-            ViewData["Products"] = viewBag;
         
+            ViewData["Products"] = viewBag;
            
+         //  string cookieValueFromReq = Request.Cookies["site_user"];
+         //  string cookieValueFromContext = _httpContextAccessor.HttpContext.Request.Cookies["site_user"];
+         //  if (cookieValueFromContext == null)
+         //  {
+         //      string UserId = "site_user";
+         //      string cookieValue = Guid.NewGuid().ToString();
+         //      HttpCookie userIdCookie = new HttpCookie();
+         //      userIdCookie.Value = cookieValue;
+         //      userIdCookie.Expires = DateTime.Now.AddMinutes(1);
+         //      Response.Cookies.Append(UserId, userIdCookie.Value);
+         //  }
+
             return  View(viewBag);
        }
     

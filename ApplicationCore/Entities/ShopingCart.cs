@@ -4,7 +4,10 @@ using System.Text;
 
 namespace Infrastructure.Models
 {
-    class ShopingCart
+   public class ShopingCart
     {
+
+        //Product ID
+        //Customer ID
     }
 }

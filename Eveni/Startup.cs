@@ -15,6 +15,10 @@ using Microsoft.AspNetCore.Identity;
 using Web.ViewModels.Services.Interfaces;
 using Web.ViewModels.Services;
 using AutoMapper;
+using Web.Middlewares;
+using Web.Middlewares.MiddlewareExtensions;
+using Microsoft.AspNetCore.Http;
+using System;
 
 namespace Web
 {
@@ -87,7 +91,30 @@ namespace Web
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+            app.Use(async (context, next) =>
+            {
+                var User =  context.Request.Cookies["UserID"];
 
+                if (User == null)
+                {
+                    string cookieValue = Guid.NewGuid().ToString();
+                    var cookieOptions = new CookieOptions()
+                    {
+                        Path = "/",
+                        Expires = DateTimeOffset.UtcNow.AddHours(1),
+                        IsEssential = true,
+                        HttpOnly = false,
+                        Secure = false,
+                    };
+                    context.Response.Cookies.Append("UserID", cookieValue, cookieOptions);
+                    
+                }
+                await next();
+
+
+            });
+            app.UseCookiePolicy();
+        //    app.UseCookieMiddleware();
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             if (!env.IsDevelopment())
