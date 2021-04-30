@@ -19,6 +19,7 @@ using Web.Middlewares;
 using Web.Middlewares.MiddlewareExtensions;
 using Microsoft.AspNetCore.Http;
 using System;
+using System.Collections.Generic;
 
 namespace Web
 {
@@ -39,7 +40,15 @@ namespace Web
             services.AddScoped(typeof(IViewModelServices), typeof(ViewModelServices));
             services.AddAutoMapper(typeof(Startup));
             services.AddControllersWithViews();
-    
+            services.AddDistributedMemoryCache();
+
+            services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromSeconds(10);
+                options.Cookie.HttpOnly = true;
+                options.Cookie.IsEssential = true;
+            });
+
 
 
 
@@ -121,7 +130,7 @@ namespace Web
             {
                 app.UseSpaStaticFiles();
             }
-
+            app.UseSession();
             app.UseRouting();
 
             app.UseAuthentication();
@@ -133,6 +142,11 @@ namespace Web
                 routes.MapRoute(
                   name: "default",
                   template: "{controller=Home}/{action=Home}/{id?}");
+
+                routes.MapRoute(
+              name: "cart",
+              template: "{controller=Cart}/{action=Index}/{id?}");
+
 
             });
         }

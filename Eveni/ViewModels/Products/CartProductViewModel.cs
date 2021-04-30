@@ -1,13 +1,16 @@
-﻿using ApplicationCore.Entities.Enums;
+﻿using ApplicationCore.Entities;
+using ApplicationCore.Entities.Enums;
 using System;
-using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Web.Services.Interfaces;
 
-namespace ApplicationCore.Entities
+namespace Web.ViewModels.Products
 {
-    public class Product : BaseEntity
+    public class CartProductViewModel
     {
-      
+
         public string Name { get; set; }
 
         public string Size { get; set; }
@@ -21,7 +24,7 @@ namespace ApplicationCore.Entities
         public SexEnum Sex { get; set; }
 
         public string Picture { get; set; }
-        
+
         public decimal Price { get; set; }
 
         public string Brand { get; set; }

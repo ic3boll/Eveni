@@ -38,9 +38,10 @@ namespace Infrastructure.Data
             return await _dbContext.Set<T>().ToListAsync();
         }
 
-        public Task<T> GetByIdAsync(int Id)
+        public async Task<T> GetByIdAsync(int Id)
         {
-            throw new NotImplementedException();
+          var productId  = await _dbContext.Set<T>().FindAsync(Id);
+            return productId;
         }
 
         public Task<IEnumerable<T>> GetWhereAsync(Expression<Func<T, bool>> predicate)

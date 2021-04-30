@@ -11,5 +11,7 @@ namespace Web.Services.Interfaces
         public Task CreateProductAsync(ProductInputModel productInputModel, ApplicationUser user);
 
         public Task<IReadOnlyCollection<Product>> GetAllProducts();
+
+        public Task<Product> GetProductId(int id);
     }
 }

@@ -42,6 +42,11 @@ namespace Web.Services
             return products;
         }
 
+        public async Task<Product> GetProductId(int id)
+        {
+           var productId =  await _productRepository.GetByIdAsync(id);
+            return productId;
+        }
     
     }
 }
