@@ -204,7 +204,7 @@ namespace Infrastructure.Data.Migrations
                     Rate = table.Column<short>(type: "smallint", nullable: false),
                     Sex = table.Column<int>(type: "int", nullable: false),
                     Picture = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    Price = table.Column<double>(type: "float", nullable: false),
                     Brand = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Category = table.Column<int>(type: "int", nullable: false),
                     ProductPlaced = table.Column<DateTime>(type: "datetime2", nullable: false),

@@ -20,6 +20,8 @@ namespace Web.Models
 
         public string Picture { get; set; }
 
+        public double Price { get; set; }
+
         public string Brand { get; set; }
 
         public CategoryEnum Category { get; set; }

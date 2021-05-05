@@ -38,8 +38,6 @@ namespace Web.Middlewares
         [Obsolete]
         public  void Set()
         {
-          
-
             string cookieValueFromContext = _httpContextAccessor.HttpContext.Request.Cookies["site_user"];
             if (cookieValueFromContext == null)
             {

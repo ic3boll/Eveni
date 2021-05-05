@@ -20,6 +20,7 @@ using Web.Middlewares.MiddlewareExtensions;
 using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
+using Web.Helpers;
 
 namespace Web
 {
@@ -41,6 +42,7 @@ namespace Web
             services.AddAutoMapper(typeof(Startup));
             services.AddControllersWithViews();
             services.AddDistributedMemoryCache();
+            services.AddScoped(typeof(CookieHelper));
 
             services.AddSession(options =>
             {
@@ -79,6 +81,7 @@ namespace Web
                 .AddIdentityServerJwt();
             services.AddControllersWithViews();
             services.AddRazorPages();
+            
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
             {
@@ -124,6 +127,7 @@ namespace Web
             });
             app.UseCookiePolicy();
         //    app.UseCookieMiddleware();
+        
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             if (!env.IsDevelopment())
@@ -143,9 +147,9 @@ namespace Web
                   name: "default",
                   template: "{controller=Home}/{action=Home}/{id?}");
 
-                routes.MapRoute(
-              name: "cart",
-              template: "{controller=Cart}/{action=Index}/{id?}");
+           //     routes.MapRoute(
+           //   name: "cart",
+           //   template: "{controller=Cart}/{action=Index}/{id?}");
 
 
             });
