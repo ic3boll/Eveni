@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Identity;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Web.Helpers.Interfaces;
 using Web.Models;
 using Web.Services.Interfaces;
 using Web.ViewModels.Products;
@@ -16,21 +17,26 @@ namespace Web.Services
     {
         private readonly IAsyncRepository<Product> _productRepository;
         private readonly IMapper _mapper;
+        private readonly IImageHelper _imageHelper;
 
         public ProductServices(IAsyncRepository<Product> productRepository, 
-            IMapper mapper)
+            IMapper mapper,
+            IImageHelper imageHelper)
         {
             _productRepository = productRepository;
             _mapper = mapper;
+            _imageHelper = imageHelper;
         }
 
   
 
-        public async Task CreateProductAsync(ProductInputModel productInputModel, ApplicationUser user)
+        public async Task CreateProductAsync(ProductInputModel productInputModel, ApplicationUser user, string picture)
         {
 
             var product = _mapper.Map<Product>(productInputModel);
             product.ApplicationUser = user;
+            product.Picture = picture;
+            
 
             await _productRepository.AddAsync(product);
 

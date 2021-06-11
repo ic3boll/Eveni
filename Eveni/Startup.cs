@@ -21,6 +21,8 @@ using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using Web.Helpers;
+using Web.Services.Intefaces;
+using Web.Helpers.Interfaces;
 
 namespace Web
 {
@@ -39,6 +41,8 @@ namespace Web
             services.AddScoped(typeof(IAsyncRepository<>), typeof(EfRepository<>));
             services.AddScoped(typeof(IProductServices),typeof(ProductServices));
             services.AddScoped(typeof(IViewModelServices), typeof(ViewModelServices));
+            services.AddScoped(typeof(IOrderServices), typeof(OrderServices));
+            services.AddScoped(typeof(IImageHelper), typeof(ImageHelper));
             services.AddAutoMapper(typeof(Startup));
             services.AddControllersWithViews();
             services.AddDistributedMemoryCache();

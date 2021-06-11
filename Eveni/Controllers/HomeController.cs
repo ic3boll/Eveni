@@ -36,18 +36,6 @@ namespace Web.Controllers
               var viewBag = _viewModelServices.SetProductCollection(products);
         
             ViewData["Products"] = viewBag;
-           
-         //  string cookieValueFromReq = Request.Cookies["site_user"];
-         //  string cookieValueFromContext = _httpContextAccessor.HttpContext.Request.Cookies["site_user"];
-         //  if (cookieValueFromContext == null)
-         //  {
-         //      string UserId = "site_user";
-         //      string cookieValue = Guid.NewGuid().ToString();
-         //      HttpCookie userIdCookie = new HttpCookie();
-         //      userIdCookie.Value = cookieValue;
-         //      userIdCookie.Expires = DateTime.Now.AddMinutes(1);
-         //      Response.Cookies.Append(UserId, userIdCookie.Value);
-         //  }
 
             return  View(viewBag);
        }

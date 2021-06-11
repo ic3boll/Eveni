@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Data.Migrations
 {
     [DbContext(typeof(EveniDbContext))]
-    [Migration("20210504131327_001")]
+    [Migration("20210517134825_001")]
     partial class _001
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -86,6 +86,65 @@ namespace Infrastructure.Data.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
+            modelBuilder.Entity("ApplicationCore.Entities.Order", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("CookieID")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Items")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Order_DetailId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Order_DetailId");
+
+                    b.ToTable("Orders");
+                });
+
+            modelBuilder.Entity("ApplicationCore.Entities.Order_Detail", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("City")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Comment")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CookieId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Phone")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Street")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Order_Details");
+                });
+
             modelBuilder.Entity("ApplicationCore.Entities.Product", b =>
                 {
                     b.Property<int>("Id")
@@ -116,9 +175,6 @@ namespace Infrastructure.Data.Migrations
 
                     b.Property<DateTime>("ProductPlaced")
                         .HasColumnType("datetime2");
-
-                    b.Property<int>("Quantity")
-                        .HasColumnType("int");
 
                     b.Property<short>("Rate")
                         .HasColumnType("smallint");
@@ -370,6 +426,17 @@ namespace Infrastructure.Data.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("ApplicationCore.Entities.Order", b =>
+                {
+                    b.HasOne("ApplicationCore.Entities.Order_Detail", "Order_Detail")
+                        .WithMany("Orders")
+                        .HasForeignKey("Order_DetailId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Order_Detail");
+                });
+
             modelBuilder.Entity("ApplicationCore.Entities.Product", b =>
                 {
                     b.HasOne("ApplicationCore.Entities.ApplicationUser", "ApplicationUser")
@@ -433,6 +500,11 @@ namespace Infrastructure.Data.Migrations
             modelBuilder.Entity("ApplicationCore.Entities.ApplicationUser", b =>
                 {
                     b.Navigation("Products");
+                });
+
+            modelBuilder.Entity("ApplicationCore.Entities.Order_Detail", b =>
+                {
+                    b.Navigation("Orders");
                 });
 #pragma warning restore 612, 618
         }

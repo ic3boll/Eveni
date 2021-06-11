@@ -3,6 +3,7 @@ using AutoMapper;
 using System;
 using System.Collections.Generic;
 using Web.Models;
+using Web.Models.Order;
 using Web.ViewModels.Products;
 
 namespace Web.Mapping
@@ -21,6 +22,8 @@ namespace Web.Mapping
             CreateMap<ApplicationUser, Product>();
             CreateMap<IReadOnlyCollection<Product>, ProductViewModel>();
             CreateMap<ProductViewModel,IReadOnlyCollection< Product>>();
+            CreateMap<OrderDetailInputModel, Order_Detail>();
+            CreateMap<Order_Detail, OrderDetailInputModel>();
 
         }
 

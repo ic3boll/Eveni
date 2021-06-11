@@ -14,8 +14,6 @@ namespace ApplicationCore.Entities
 
         public string Color { get; set; }
 
-        public ushort Quantity { get; set; }
-
         public sbyte Rate { get; set; }
 
         public SexEnum Sex { get; set; }

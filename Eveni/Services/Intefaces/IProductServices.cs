@@ -8,7 +8,7 @@ namespace Web.Services.Interfaces
 {
     public interface IProductServices
     {
-        public Task CreateProductAsync(ProductInputModel productInputModel, ApplicationUser user);
+        public Task CreateProductAsync(ProductInputModel productInputModel, ApplicationUser user, string picture);
 
         public Task<IReadOnlyCollection<Product>> GetAllProducts();
 

@@ -9,6 +9,7 @@
     <tr>
         <th>Option</th>
         <th>Id</th>
+        <th>Photo</th>
         <th>Name</th>
         <th>Price</th>
         <th>Quantity</th>
@@ -19,6 +20,9 @@
         <tr>
             <td><a asp-controller="cart" asp-action="remove" asp-route-id="@item.Product.Id">Remove</a></td>
             <td>@item.Product.Id</td>
+            <th>
+                <img src="@item.Product.Picture" alt="..." width="100" height="100">
+            </th>            
             <td>@item.Product.Name</td>
             <td>@item.Product.Price</td>
             <td>@item.Quantity</td>
@@ -33,5 +37,7 @@
     </tr>
 </table>
 <br>
+
+<a asp-controller="Order" asp-action="Complete">Complete Order</a>
 <a asp-controller="Home" asp-action="Home">Continue Shopping</a>
 

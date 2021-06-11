@@ -1,4 +1,5 @@
 ﻿using ApplicationCore.Entities.Enums;
+using Microsoft.AspNetCore.Http;
 using System;
 
 namespace Web.Models
@@ -23,6 +24,8 @@ namespace Web.Models
         public double Price { get; set; }
 
         public string Brand { get; set; }
+
+        public IFormFile ImageFile { get; set; }
 
         public CategoryEnum Category { get; set; }
 

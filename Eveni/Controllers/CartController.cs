@@ -38,6 +38,8 @@ namespace Web.Controllers
         [Obsolete]
         public async Task<IActionResult> Buy(int id)
         {
+
+            var cookieRequest = "CookieCart";
             var productId = await _productServices.GetProductId(id);
 
             var cookieOptions = new CookieOptions()
@@ -48,13 +50,15 @@ namespace Web.Controllers
                 HttpOnly = false,
                 Secure = false,
             };
-            if (Request.Cookies["CookieCart"] == null)
+            if (Request.Cookies[cookieRequest] == null)
             {
-                //SET:
-                _cookieHelper.Set(productId, cookieOptions);
+                //SET if null:
+                _cookieHelper.Set(productId, cookieOptions, cookieRequest);
+
+                return RedirectToAction("Home", "Home");
             }
-                //GET:
-                _cookieHelper.Get(id, productId, cookieOptions);
+                //SET:
+                _cookieHelper.Set(id, productId, cookieOptions, cookieRequest);
             
             return RedirectToAction("Home","Home");
         }
