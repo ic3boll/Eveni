@@ -9,4 +9,3 @@ C:\Project\Eveni\ApplicationCore\obj\Debug\net5.0\ApplicationCore.csproj.CoreCom
 C:\Project\Eveni\ApplicationCore\obj\Debug\net5.0\ApplicationCore.dll
 C:\Project\Eveni\ApplicationCore\obj\Debug\net5.0\ref\ApplicationCore.dll
 C:\Project\Eveni\ApplicationCore\obj\Debug\net5.0\ApplicationCore.pdb
-C:\Project\Eveni\ApplicationCore\obj\Debug\net5.0\ApplicationCore.csprojAssemblyReference.cache

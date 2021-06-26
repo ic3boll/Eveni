@@ -40,7 +40,7 @@ namespace Web.Controllers
         {
 
             var cookieRequest = "CookieCart";
-            var productId = await _productServices.GetProductId(id);
+            var productId = await _productServices.GetIdAsync(id);
 
             var cookieOptions = new CookieOptions()
             {

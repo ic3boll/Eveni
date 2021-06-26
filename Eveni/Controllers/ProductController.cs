@@ -41,7 +41,7 @@ namespace Web.Controllers
             var picture = _imageHelper.ImageUpload(productViewModel.ImageFile.OpenReadStream());
             var user = await _userManager.GetUserAsync(User);
             var productInputModel = _mapper.Map<ProductInputModel>(productViewModel);
-            await _productServices.CreateProductAsync(productInputModel,user, picture);
+            await _productServices.CreateAsync(productInputModel,user, picture);
             return View();
         }
 

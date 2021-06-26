@@ -17,6 +17,8 @@ namespace Infrastructure.Migrations
         public DbSet<Order> Orders { get; set; }
 
         public DbSet<Order_Detail> Order_Details{ get; set; }
+
+        public DbSet<Image> Images { get; set; }
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
@@ -27,6 +29,11 @@ namespace Infrastructure.Migrations
                 .HasOne<Order_Detail>(od => od.Order_Detail)
                 .WithMany(o => o.Orders)
                 .IsRequired();
+            builder.Entity<Image>()
+                .HasOne<Product>(p => p.Product)
+                .WithMany(i => i.Images)
+                .IsRequired();
+            
 
             // Customize the ASP.NET Identity model and override the defaults if needed.
             // For example, you can rename the ASP.NET Identity table names and more.

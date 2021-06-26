@@ -31,7 +31,7 @@ namespace Web.Controllers
         [Obsolete]
         public async Task<IActionResult> Home()
        {
-            var products = await this._productServices.GetAllProducts();
+            var products = await this._productServices.GetAllAsync();
          
               var viewBag = _viewModelServices.SetProductCollection(products);
         
