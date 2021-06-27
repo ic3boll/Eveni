@@ -37,10 +37,13 @@ namespace Web.Services
         {
 
             var product = _mapper.Map<Product>(productInputModel);
+            product.ApplicationUser = user;
+
             var image = new Image();
             image.ImageUrl = picture;
             image.Product = product;
-            product.ApplicationUser = user;
+            image.imageEnum = productInputModel.imageEnum;
+          
        
             
 

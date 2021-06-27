@@ -39,10 +39,11 @@ namespace Web
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddScoped(typeof(IAsyncRepository<>), typeof(EfRepository<>));
-            services.AddScoped(typeof(IProductServices),typeof(ProductServices));
+            services.AddScoped(typeof(IProductServices), typeof(ProductServices));
             services.AddScoped(typeof(IViewModelServices), typeof(ViewModelServices));
             services.AddScoped(typeof(IOrderServices), typeof(OrderServices));
             services.AddScoped(typeof(IImageHelper), typeof(ImageHelper));
+            services.AddScoped(typeof(IImageServices), typeof(ImageServices));
             services.AddAutoMapper(typeof(Startup));
             services.AddControllersWithViews();
             services.AddDistributedMemoryCache();
@@ -62,7 +63,7 @@ namespace Web
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
 
-          
+
             services.AddMvc(option => option.EnableEndpointRouting = false);
 
             services.AddIdentity<ApplicationUser, IdentityRole>(opt =>
@@ -79,13 +80,13 @@ namespace Web
 
       .AddDefaultTokenProviders()
       .AddEntityFrameworkStores<EveniDbContext>();
-          
+
 
             services.AddAuthentication()
                 .AddIdentityServerJwt();
             services.AddControllersWithViews();
             services.AddRazorPages();
-            
+
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
             {
@@ -99,7 +100,7 @@ namespace Web
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-             
+
             }
             else
             {
@@ -109,7 +110,7 @@ namespace Web
             }
             app.Use(async (context, next) =>
             {
-                var User =  context.Request.Cookies["UserID"];
+                var User = context.Request.Cookies["UserID"];
 
                 if (User == null)
                 {
@@ -123,15 +124,15 @@ namespace Web
                         Secure = false,
                     };
                     context.Response.Cookies.Append("UserID", cookieValue, cookieOptions);
-                    
+
                 }
                 await next();
 
 
             });
             app.UseCookiePolicy();
-        //    app.UseCookieMiddleware();
-        
+            //    app.UseCookieMiddleware();
+
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             if (!env.IsDevelopment())
@@ -142,18 +143,18 @@ namespace Web
             app.UseRouting();
 
             app.UseAuthentication();
-         //   app.UseIdentityServer();
+            //   app.UseIdentityServer();
             app.UseAuthorization();
-        
+
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
                   name: "default",
                   template: "{controller=Home}/{action=Home}/{id?}");
 
-           //     routes.MapRoute(
-           //   name: "cart",
-           //   template: "{controller=Cart}/{action=Index}/{id?}");
+                //     routes.MapRoute(
+                //   name: "cart",
+                //   template: "{controller=Cart}/{action=Index}/{id?}");
 
 
             });

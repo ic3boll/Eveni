@@ -6,7 +6,7 @@ namespace Web.Models
 {
     public class ProductInputModel
     {
-    //    public int Id { get; set; }
+        //    public int Id { get; set; }
         public string Name { get; set; }
 
         public string Size { get; set; }
@@ -19,11 +19,11 @@ namespace Web.Models
 
         public SexEnum Sex { get; set; }
 
-        public string Picture { get; set; }
-
         public double Price { get; set; }
 
         public string Brand { get; set; }
+
+        public ImageEnum imageEnum { get; set; }
 
         public IFormFile ImageFile { get; set; }
 

@@ -41,10 +41,19 @@
             </div>
         </div>
         <div class="form-group">
+            <label asp-for="imageEnum" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <select asp-for="imageEnum" asp-items="Html.GetEnumSelectList<ImageEnum>()">
+                    <option selected="selected" value="">Please select ImageCategory for your product</option>
+                </select>
+                <span asp-validation-for="imageEnum" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
             <label asp-for="Sex" class="col-md-2 control-label"></label>
             <div class="col-md-10">
                 <select asp-for="Sex" asp-items="Html.GetEnumSelectList<SexEnum>()">
-                    <option selected="selected" value="">Please select Category for your product</option>
+                    <option selected="selected" value="">Please select SexCategory for your product</option>
                 </select>
                 <span asp-validation-for="Sex" class="text-danger" />
             </div>
@@ -55,6 +64,12 @@
                     <p>Upload one or more files using this form:</p>
                     <input type="file" name="ImageFile" multiple />
                 </div>
+            </div>
+        </div>
+        <div>
+            <div class="form-group">
+
+
             </div>
         </div>
         <div class="form-group">

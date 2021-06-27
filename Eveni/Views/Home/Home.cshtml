@@ -1,11 +1,13 @@
 ﻿@using Web.ViewModels.Products
 @using ApplicationCore.Entities.Enums
+@using Web.ViewModels.Images
 @{
-        var data = (List<ProductViewModel>)ViewData["Products"];
+    var products = (List<ProductViewModel>)ViewData["Products"];
+    var images = (List<ImageViewModel>)ViewData["Images"];
     var fashion = CategoryEnum.Fashion;
 
 }
-@foreach (var item in data)
+@foreach (var item in products)
 {
     if (item.Category.Equals(fashion))
     {
@@ -13,7 +15,12 @@
             <div class="col-sm-6 col-md-3">
                 <div class="thumbnail">
                     <label>Name: </label>
-                    <img src="@item.Picture" alt="...">
+                    @foreach (var imageItem in images.Where(i => i.Product.Id == item.Id && i.imageEnum.Equals(1)))
+                    {
+
+                        <img src=" @imageItem.ImageUrl" alt="...">
+                    }
+
                     <h4>@item.Name </h4>
 
                     <a asp-controller="ReceiptMannager" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary">Edit</a>
@@ -23,8 +30,8 @@
                 </div>
             </div>
         </div>
-        }
-
     }
+
+}
 
 

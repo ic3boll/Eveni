@@ -44,16 +44,12 @@
             <label asp-for="Sex" class="col-md-2 control-label"></label>
             <div class="col-md-10">
                 <select asp-for="Sex" asp-items="Html.GetEnumSelectList<CategoryEnum>()">
-                    <option selected="selected" value="">Please select Category for your product</option>
+                    <option selected="selected" value="">Please select Sex for your product</option>
                 </select>
                 <span asp-validation-for="Sex" class="text-danger" />
             </div>
         </div>
-        <div class="form-group">
-            <label asp-for="Picture" class="control-label"></label>
-            <input asp-for="Picture" class="form-control" />
-            <span asp-validation-for="Picture" class="text-danger"></span>
-        </div>
+   
         <div class="form-group">
             <label asp-for="Brand" class="control-label"></label>
             <input asp-for="Brand" class="form-control" />

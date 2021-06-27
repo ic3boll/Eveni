@@ -36,19 +36,16 @@ namespace Web.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(ProductViewModel productViewModel)
+        public async Task<IActionResult> Create(ProductInputModel productInputModel)
         {
-            var picture = _imageHelper.ImageUpload(productViewModel.ImageFile.OpenReadStream());
+            var picture = _imageHelper.ImageUpload(productInputModel.ImageFile.OpenReadStream());
             var user = await _userManager.GetUserAsync(User);
-            var productInputModel = _mapper.Map<ProductInputModel>(productViewModel);
-            await _productServices.CreateAsync(productInputModel,user, picture);
+            //   var prodauctInputModel = _mapper.Map<ProductInputModel>(productViewModel);
+            
+               await _productServices.CreateAsync(productInputModel, user, picture);
             return View();
         }
 
-        public async Task<IActionResult> Update()
-        {
 
-            return View();
-        }
     }
 }
