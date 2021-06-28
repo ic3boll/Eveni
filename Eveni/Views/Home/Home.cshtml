@@ -5,6 +5,7 @@
     var products = (List<ProductViewModel>)ViewData["Products"];
     var images = (List<ImageViewModel>)ViewData["Images"];
     var fashion = CategoryEnum.Fashion;
+    var imageEnumCheck = ImageEnum.Primary;
 
 }
 @foreach (var item in products)
@@ -15,10 +16,13 @@
             <div class="col-sm-6 col-md-3">
                 <div class="thumbnail">
                     <label>Name: </label>
-                    @foreach (var imageItem in images.Where(i => i.Product.Id == item.Id && i.imageEnum.Equals(1)))
+                    @foreach (var imageItem in images.Where(i => i.Product.Id == item.Id))
                     {
+                        @if (imageItem.imageEnum.Equals(imageEnumCheck))
+                        {
+                            <img src=" @imageItem.ImageUrl" alt="...">
+                        }
 
-                        <img src=" @imageItem.ImageUrl" alt="...">
                     }
 
                     <h4>@item.Name </h4>

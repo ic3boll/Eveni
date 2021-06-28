@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using System;
 
-namespace Web.Models
+namespace Web.Models.Product
 {
     public class ProductInputModel
     {

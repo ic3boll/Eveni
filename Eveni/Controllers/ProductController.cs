@@ -1,5 +1,6 @@
 ﻿using ApplicationCore.Entities;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -8,6 +9,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Web.Helpers.Interfaces;
 using Web.Models;
+using Web.Models.Product;
 using Web.Services.Interfaces;
 using Web.ViewModels.Products;
 
@@ -29,12 +31,12 @@ namespace Web.Controllers
             this._userManager = userManager;
             this._imageHelper = imageHelper;
         }
-
+        [Authorize]
         public IActionResult Create()
         {
             return View();
         }
-
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> Create(ProductInputModel productInputModel)
         {
@@ -44,6 +46,10 @@ namespace Web.Controllers
             
                await _productServices.CreateAsync(productInputModel, user, picture);
             return View();
+        }
+        public async Task<IActionResult> Edit(ProductInputModel productInputModel)
+        {
+
         }
 
 
