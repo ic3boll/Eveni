@@ -41,7 +41,7 @@ namespace Web.Middlewares
             string cookieValueFromContext = _httpContextAccessor.HttpContext.Request.Cookies["site_user"];
             if (cookieValueFromContext == null)
             {
-                string UserId = "site_user";
+               // string UserId = "site_user";
                 string cookieValue = Guid.NewGuid().ToString();
                 HttpCookie userIdCookie = new HttpCookie
                 {

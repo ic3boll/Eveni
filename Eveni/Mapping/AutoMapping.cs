@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using Web.Models;
 using Web.Models.Order;
+using Web.Models.Product;
 using Web.ViewModels.Images;
 using Web.ViewModels.Products;
 
@@ -16,6 +17,10 @@ namespace Web.Mapping
             //ApplicationUser
             CreateMap<ProductViewModel, ProductInputModel>();
             CreateMap<Product, ProductInputModel>();
+            CreateMap<ProductEditViewModel, Product>();
+            CreateMap<Product, ProductEditViewModel>();
+            CreateMap<ProductEditModel, Product>();
+            CreateMap<Product, ProductEditModel>();
             CreateMap<ProductInputModel, Product>();
             CreateMap<ProductViewModel, Product>();
             CreateMap<Product, ProductViewModel>();

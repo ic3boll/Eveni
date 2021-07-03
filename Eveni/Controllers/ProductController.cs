@@ -43,13 +43,26 @@ namespace Web.Controllers
             var picture = _imageHelper.ImageUpload(productInputModel.ImageFile.OpenReadStream());
             var user = await _userManager.GetUserAsync(User);
             //   var prodauctInputModel = _mapper.Map<ProductInputModel>(productViewModel);
-            
-               await _productServices.CreateAsync(productInputModel, user, picture);
+
+            await _productServices.CreateAsync(productInputModel, user, picture);
             return View();
         }
-        public async Task<IActionResult> Edit(ProductInputModel productInputModel)
+        [HttpGet]
+        public async Task<IActionResult> Edit(int id)
         {
+            var productId = await _productServices.GetIdAsync(id);
+            var productViewModel = _mapper.Map<ProductEditViewModel>(productId);
+            ViewData["Product"] = productViewModel;
+            return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult> Edit(ProductEditModel productEditModel, int id)
+        {
+              var picture = _imageHelper.ImageUpload(productEditModel.ImageFile.OpenReadStream());
+           
+            await _productServices.EditAsync(productEditModel, picture, id);
 
+            return RedirectToAction("Home", "Home");
         }
 
 

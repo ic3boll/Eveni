@@ -7,11 +7,12 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
-namespace Infrastructure.Data   
+namespace Infrastructure.Data
 {
     public class EfRepository<T> : IAsyncRepository<T> where T : class
     {
         protected readonly EveniDbContext _dbContext;
+
         public EfRepository(EveniDbContext dbContext)
         {
             _dbContext = dbContext;
@@ -40,7 +41,7 @@ namespace Infrastructure.Data
 
         public async Task<T> GetByIdAsync(int Id)
         {
-          var productId  = await _dbContext.Set<T>().FindAsync(Id);
+            var productId = await _dbContext.Set<T>().FindAsync(Id);
             return productId;
         }
 
@@ -54,9 +55,13 @@ namespace Infrastructure.Data
             throw new NotImplementedException();
         }
 
-        public Task UpdateAsync(T entity)
+        public async Task UpdateAsync(T entity)
         {
-            throw new NotImplementedException();
+            _dbContext.Attach(entity);
+            _dbContext.Entry(entity).State = EntityState.Modified;
+
+            await _dbContext.SaveChangesAsync();
+         
         }
     }
 }

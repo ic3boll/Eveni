@@ -5,10 +5,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Web.Models.Product
+namespace Web.ViewModels.Products
 {
-    public class ProductEditModel
+    public class ProductEditViewModel
     {
+        public int Id { get; set; }
         public string Name { get; set; }
 
         public string Size { get; set; }
@@ -19,13 +20,13 @@ namespace Web.Models.Product
 
         public sbyte Rate { get; set; }
 
+        public string Picture { get; set; }
+
         public SexEnum Sex { get; set; }
 
         public double Price { get; set; }
 
         public string Brand { get; set; }
-
-        public ImageEnum imageEnum { get; set; }
 
         public IFormFile ImageFile { get; set; }
 

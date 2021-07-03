@@ -21,7 +21,7 @@ namespace Web.Services
         private readonly IMapper _mapper;
         private readonly IImageHelper _imageHelper;
 
-        public ProductServices(IAsyncRepository<Product> productRepository, 
+        public ProductServices(IAsyncRepository<Product> productRepository,
             IMapper mapper,
             IImageHelper imageHelper,
             IAsyncRepository<Image> imageRepository)
@@ -32,7 +32,7 @@ namespace Web.Services
             _imageRepository = imageRepository;
         }
 
-  
+
 
         public async Task CreateAsync(ProductInputModel productInputModel, ApplicationUser user, string picture)
         {
@@ -44,11 +44,7 @@ namespace Web.Services
             image.ImageUrl = picture;
             image.Product = product;
             image.imageEnum = productInputModel.imageEnum;
-          
-       
-            
 
-           // await _productRepository.AddAsync(product);
             await _imageRepository.AddAsync(image);
 
         }
@@ -61,9 +57,27 @@ namespace Web.Services
 
         public async Task<Product> GetIdAsync(int id)
         {
-           var productId =  await _productRepository.GetByIdAsync(id);
+            var productId = await _productRepository.GetByIdAsync(id);
             return productId;
         }
-    
+
+        public async Task EditAsync(ProductEditModel productEditModel, string imageModel, int id)
+        {
+            var productToEdit = await GetIdAsync(id);
+
+            _mapper.Map(productEditModel, productToEdit);
+
+
+           var image = new Image();
+           image.ImageUrl = imageModel;
+           image.Product = productToEdit;
+           image.ProductId = id;
+           image.imageEnum = productEditModel.imageEnum;
+
+            await _productRepository.UpdateAsync(productToEdit);
+            await _imageRepository.AddAsync(image);
+           // await _imageRepository.UpdateAsync(image);
+        }
+
     }
 }
