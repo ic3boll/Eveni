@@ -82,10 +82,8 @@ namespace Web.Controllers
             {
                return this.RedirectToAction("Login","Account");
             }
-            else
-            {
                 return this.RedirectToAction("Home","Home");
-            }
+            
         }
         [HttpPost]
         public async Task<IActionResult> Logout()

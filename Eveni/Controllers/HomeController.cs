@@ -46,7 +46,6 @@ namespace Web.Controllers
             ViewData["Images"] = ImageViewBag;
 
 
-
             return View();
         }
 

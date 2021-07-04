@@ -47,6 +47,13 @@ namespace Web.Controllers
             await _productServices.CreateAsync(productInputModel, user, picture);
             return View();
         }
+        public async Task<IActionResult> Index(int id)
+        {
+            var product = await _productServices.GetIdAsync(id);
+            _mapper.Map<ProductViewModel>(product);
+            return View(product);
+        }
+
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {

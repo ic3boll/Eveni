@@ -11,14 +11,14 @@ namespace Web.Middlewares
     {
         private readonly IHttpContextAccessor _httpContextAccessor;
 
-          private readonly RequestDelegate _next;
-       // private readonly HttpContext _httpContext;
+        private readonly RequestDelegate _next;
+        // private readonly HttpContext _httpContext;
         public CookieMiddleware(IHttpContextAccessor httpContextAccessor,
         //    HttpContext httpContext,
           RequestDelegate next)
         {
             this._httpContextAccessor = httpContextAccessor;
-          //  this._httpContext = httpContext;
+            //  this._httpContext = httpContext;
             this._next = next;
         }
 
@@ -28,20 +28,20 @@ namespace Web.Middlewares
         {
 
             Set();
-          //  HttpContext.Request.Cookies["site_user"];
+            //  HttpContext.Request.Cookies["site_user"];
 
             await this._next(context);
-     //       context.Response.Cookies.Append();
+            //       context.Response.Cookies.Append();
 
         }
 
         [Obsolete]
-        public  void Set()
+        public void Set()
         {
             string cookieValueFromContext = _httpContextAccessor.HttpContext.Request.Cookies["site_user"];
             if (cookieValueFromContext == null)
             {
-               // string UserId = "site_user";
+                // string UserId = "site_user";
                 string cookieValue = Guid.NewGuid().ToString();
                 HttpCookie userIdCookie = new HttpCookie
                 {
@@ -49,7 +49,7 @@ namespace Web.Middlewares
                     Expires = DateTime.Now.AddMinutes(1)
                 };
 
-             //   HttpContext.Response.Cookies.Append(UserId, userIdCookie.Value);
+                //   HttpContext.Response.Cookies.Append(UserId, userIdCookie.Value);
             }
         }
     }

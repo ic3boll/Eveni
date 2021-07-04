@@ -76,7 +76,6 @@ namespace Web.Services
 
             await _productRepository.UpdateAsync(productToEdit);
             await _imageRepository.AddAsync(image);
-           // await _imageRepository.UpdateAsync(image);
         }
 
     }
