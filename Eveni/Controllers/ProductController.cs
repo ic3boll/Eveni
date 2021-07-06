@@ -53,7 +53,7 @@ namespace Web.Controllers
             _mapper.Map<ProductViewModel>(product);
             return View(product);
         }
-
+        [Authorize]
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
@@ -62,6 +62,7 @@ namespace Web.Controllers
             ViewData["Product"] = productViewModel;
             return View();
         }
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> Edit(ProductEditModel productEditModel, int id)
         {
@@ -69,6 +70,14 @@ namespace Web.Controllers
            
             await _productServices.EditAsync(productEditModel, picture, id);
 
+            return RedirectToAction("Home", "Home");
+        }
+        
+       // [ValidateAntiForgeryToken]
+       // [Authorize]
+        public async Task<IActionResult> Delete(int id)
+        {
+            await _productServices.DeleteAsync(id);
             return RedirectToAction("Home", "Home");
         }
 

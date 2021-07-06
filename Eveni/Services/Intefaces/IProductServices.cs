@@ -15,7 +15,7 @@ namespace Web.Services.Interfaces
 
         public Task<Product> GetIdAsync(int id);
 
-
+        public Task DeleteAsync(int id);
         public Task EditAsync(ProductEditModel productEditModel, string imageModel, int id);
     }
 }

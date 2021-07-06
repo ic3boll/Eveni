@@ -50,9 +50,14 @@ namespace Infrastructure.Data
             throw new NotImplementedException();
         }
 
-        public Task RemoveAsync(T entity)
+        public async Task RemoveAsync(T entity)
         {
-            throw new NotImplementedException();
+            if(entity == null)
+            {
+                throw new ArgumentNullException("entity");
+            }
+             _dbContext.Remove(entity);
+            await _dbContext.SaveChangesAsync();
         }
 
         public async Task UpdateAsync(T entity)

@@ -78,5 +78,10 @@ namespace Web.Services
             await _imageRepository.AddAsync(image);
         }
 
+        public async Task DeleteAsync(int id)
+        {
+          var product = await _productRepository.GetByIdAsync(id);
+            await _productRepository.RemoveAsync(product);
+        }
     }
 }
