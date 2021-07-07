@@ -85,7 +85,8 @@ namespace Web.Controllers
                 return this.RedirectToAction("Home","Home");
             
         }
-        [HttpPost]
+        [Authorize]
+      
         public async Task<IActionResult> Logout()
         {
             await _signInManager.SignOutAsync();

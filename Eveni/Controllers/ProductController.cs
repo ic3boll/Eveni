@@ -42,7 +42,6 @@ namespace Web.Controllers
         {
             var picture = _imageHelper.ImageUpload(productInputModel.ImageFile.OpenReadStream());
             var user = await _userManager.GetUserAsync(User);
-            //   var prodauctInputModel = _mapper.Map<ProductInputModel>(productViewModel);
 
             await _productServices.CreateAsync(productInputModel, user, picture);
             return View();
@@ -78,6 +77,7 @@ namespace Web.Controllers
         public async Task<IActionResult> Delete(int id)
         {
             await _productServices.DeleteAsync(id);
+
             return RedirectToAction("Home", "Home");
         }
 

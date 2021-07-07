@@ -1,0 +1,40 @@
+﻿@using Web.ViewModels.Products
+@using ApplicationCore.Entities.Enums
+@using Web.ViewModels.Images
+@{
+    var products = (List<ProductViewModel>)ViewData["Products"];
+    var images = (List<ImageViewModel>)ViewData["Images"];
+    var imageEnumCheck = ImageEnum.Primary;
+
+}
+@foreach (var item in products)
+{
+
+    <div class="row">
+        <div class="col-sm-6 col-md-3">
+            <div class="thumbnail">
+                <label>Name: </label>
+                @foreach (var imageItem in images.Where(i => i.Product.Id == item.Id))
+                {
+                    @if (imageItem.imageEnum.Equals(imageEnumCheck))
+                    {
+                        <img src=" @imageItem.ImageUrl" alt="...">
+                    }
+
+                }
+
+                <h4>@item.Name </h4>
+
+                <a asp-controller="Product" asp-action="Delete" asp-route-id="@item.Id" class="btn btn-primary">Delete</a>
+                <a asp-controller="Product" asp-action="Index" asp-route-id="@item.Id" class="btn btn-primary">Details</a>
+                <a asp-controller="Product" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary">Edit</a>
+                <a asp-controller="Cart" asp-action="Index" asp-route-id="@item.Id" class="btn btn-primary">Cart</a>
+                <a asp-controller="Cart" asp-action="Buy" asp-route-id="@item.Id" class="btn btn-primary">Buy</a>
+
+            </div>
+        </div>
+    </div>
+
+}
+
+

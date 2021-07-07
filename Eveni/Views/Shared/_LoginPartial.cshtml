@@ -9,7 +9,7 @@
     <form asp-controller="Account" asp-action="Logout" asp-route-returnUrl="@Url.Action("Home", "Home")" class="navbar-right">
         <ul class="nav navbar-nav navbar-right">
             <li>
-                <a asp-controller="Product" asp-action="Create" title="Manage">Hello @userManager.GetUserName(User)!</a>
+                <a asp-controller="Manager" asp-action="Index" title="Manage">Hello @userManager.GetUserName(User)!</a>
             </li>
             <li>
                 <button type="submit" class="btn btn-link navbar-btn navbar-link">Logout</button>
