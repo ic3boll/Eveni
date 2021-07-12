@@ -3,6 +3,7 @@ using ApplicationCore.Interfaces;
 using ApplicationCore.Interfaces.Repositories;
 using AutoMapper;
 using Microsoft.AspNetCore.Identity;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -36,8 +37,9 @@ namespace Web.Services
 
         public async Task CreateAsync(ProductInputModel productInputModel, ApplicationUser user, string picture)
         {
-
+            DateTime now = DateTime.Now;
             var product = _mapper.Map<Product>(productInputModel);
+            product.ProductPlaced = now;
             product.ApplicationUser = user;
 
             var image = new Image();
@@ -64,9 +66,11 @@ namespace Web.Services
         public async Task EditAsync(ProductEditModel productEditModel, string imageModel, int id)
         {
             var productToEdit = await GetIdAsync(id);
+            DateTime now = DateTime.Now;
+           
 
             _mapper.Map(productEditModel, productToEdit);
-
+            productToEdit.ProductPlaced = now;
 
            var image = new Image();
            image.ImageUrl = imageModel;

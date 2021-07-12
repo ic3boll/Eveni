@@ -22,16 +22,16 @@ namespace Web.ViewModels.Products
 
         public string Picture { get; set; }
 
-        public SexEnum Sex { get; set; }
-
         public double Price { get; set; }
 
         public string Brand { get; set; }
 
         public IFormFile ImageFile { get; set; }
-
+        public ImageEnum ImageEnum { get; set; }
         public CategoryEnum Category { get; set; }
 
-        public DateTime ProductPlaced { get; set; }
+        public SexEnum SexEnum { get; set; }
+       
+
     }
 }

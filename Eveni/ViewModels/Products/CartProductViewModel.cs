@@ -31,8 +31,6 @@ namespace Web.ViewModels.Products
 
         public CategoryEnum Category { get; set; }
 
-        public DateTime ProductPlaced { get; set; }
-
         public ApplicationUser ApplicationUser { get; set; }
 
     }

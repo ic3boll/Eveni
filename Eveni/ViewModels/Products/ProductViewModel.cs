@@ -28,7 +28,5 @@ namespace Web.ViewModels.Products
         public IFormFile ImageFile { get; set; }
 
         public CategoryEnum Category { get; set; }
-
-        public DateTime ProductPlaced { get; set; }
     }
 }
