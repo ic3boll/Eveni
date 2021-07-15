@@ -5,6 +5,7 @@ using Web.ViewModels.Services.Interfaces;
 using Web.ViewModels.Products;
 using ApplicationCore.Entities;
 using Web.ViewModels.Images;
+using System.Linq;
 
 namespace Web.ViewModels.Services
 {
@@ -37,6 +38,17 @@ namespace Web.ViewModels.Services
                 listOfProducts.Add(product);
             }
             return listOfProducts;
+        }
+
+        public List<ImageViewModel> SetProductImageCollection(IReadOnlyCollection<Image> images, int id)
+        {
+            var listOfImages = new List<ImageViewModel>();
+            foreach (var item in images.Where(i=>i.ProductId==id))
+            {
+                var image = _mapper.Map<ImageViewModel>(item);
+                listOfImages.Add(image);
+            }
+            return listOfImages;
         }
 
     }

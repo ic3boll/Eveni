@@ -3,7 +3,7 @@ using ApplicationCore.Interfaces.Repositories;
 using AutoMapper;
 using System.Threading.Tasks;
 using Web.Models.Order;
-using Web.Services.Intefaces;
+using Web.Services.Interfaces;
 
 namespace Web.Services
 {

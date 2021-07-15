@@ -11,5 +11,7 @@ namespace Web.ViewModels.Services.Interfaces
         List<ProductViewModel> SetProductCollection(IReadOnlyCollection<Product> products);
 
         public List<ImageViewModel> SetImageCollection(IReadOnlyCollection<Image> images);
+
+        public List<ImageViewModel> SetProductImageCollection(IReadOnlyCollection<Image> images, int id);
     }
 }

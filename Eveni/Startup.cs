@@ -14,14 +14,9 @@ using ApplicationCore.Entities;
 using Microsoft.AspNetCore.Identity;
 using Web.ViewModels.Services.Interfaces;
 using Web.ViewModels.Services;
-using AutoMapper;
-using Web.Middlewares;
-using Web.Middlewares.MiddlewareExtensions;
 using Microsoft.AspNetCore.Http;
 using System;
-using System.Collections.Generic;
 using Web.Helpers;
-using Web.Services.Intefaces;
 using Web.Helpers.Interfaces;
 
 namespace Web

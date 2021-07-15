@@ -62,6 +62,18 @@ namespace Web.Services
             var productId = await _productRepository.GetByIdAsync(id);
             return productId;
         }
+        public async Task EditAsync(ProductEditModel productEditModel,int id)
+        {
+            var productToEdit = await GetIdAsync(id);
+            DateTime now = DateTime.Now;
+
+
+            _mapper.Map(productEditModel, productToEdit);
+            productToEdit.ProductPlaced = now;
+
+
+            await _productRepository.UpdateAsync(productToEdit);
+        }
 
         public async Task EditAsync(ProductEditModel productEditModel, string imageModel, int id)
         {
@@ -81,6 +93,7 @@ namespace Web.Services
             await _productRepository.UpdateAsync(productToEdit);
             await _imageRepository.AddAsync(image);
         }
+
 
         public async Task DeleteAsync(int id)
         {

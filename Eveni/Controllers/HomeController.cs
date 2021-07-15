@@ -1,10 +1,8 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using RestSharp;
 using System;
 using System.Threading.Tasks;
-using Web.Services.Intefaces;
 using Web.Services.Interfaces;
 using Web.ViewModels.Services.Interfaces;
 

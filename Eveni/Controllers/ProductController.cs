@@ -3,15 +3,14 @@ using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Web.Helpers.Interfaces;
-using Web.Models;
 using Web.Models.Product;
 using Web.Services.Interfaces;
+using Web.ViewModels.Images;
 using Web.ViewModels.Products;
+using Web.ViewModels.Services.Interfaces;
 
 namespace Web.Controllers
 {
@@ -21,15 +20,21 @@ namespace Web.Controllers
         private readonly IProductServices _productServices;
         private readonly IMapper _mapper;
         private readonly IImageHelper _imageHelper;
+        private readonly IImageServices _imageServices;
+        private readonly IViewModelServices _viewModelServices;
         public ProductController(IProductServices productServices,
             IMapper mapper,
             UserManager<ApplicationUser> userManager,
-            IImageHelper imageHelper)
+            IImageHelper imageHelper,
+            IImageServices imageServices,
+            IViewModelServices viewModelServices)
         {
             this._productServices = productServices;
             this._mapper = mapper;
             this._userManager = userManager;
             this._imageHelper = imageHelper;
+            this._imageServices = imageServices;
+            this._viewModelServices = viewModelServices;
         }
         [Authorize]
         public IActionResult Create()
@@ -49,7 +54,17 @@ namespace Web.Controllers
         public async Task<IActionResult> Index(int id)
         {
             var product = await _productServices.GetIdAsync(id);
-            _mapper.Map<ProductViewModel>(product);
+            var image = await _imageServices.GetAllAsync();
+
+           // var imageC = _viewModelServices.SetImageCollection(image).Where(i => i.ProductId == id);
+
+            var productImage = _viewModelServices.SetProductImageCollection(image,id);
+            
+            
+
+           ViewData["Product"]= _mapper.Map<ProductViewModel>(product);
+            ViewData["Images"] = productImage;
+
             return View(product);
         }
         [Authorize]
@@ -65,9 +80,15 @@ namespace Web.Controllers
         [HttpPost]
         public async Task<IActionResult> Edit(ProductEditModel productEditModel, int id)
         {
-              var picture = _imageHelper.ImageUpload(productEditModel.ImageFile.OpenReadStream());
+            if(productEditModel.ImageFile != null)
+            {
+
+                var picture = _imageHelper.ImageUpload(productEditModel.ImageFile.OpenReadStream());
+
+                await _productServices.EditAsync(productEditModel, picture, id);
+            }
            
-            await _productServices.EditAsync(productEditModel, picture, id);
+            await _productServices.EditAsync(productEditModel, id);
 
             return RedirectToAction("Home", "Home");
         }

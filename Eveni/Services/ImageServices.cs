@@ -1,10 +1,10 @@
 ﻿using ApplicationCore.Entities;
 using ApplicationCore.Interfaces.Repositories;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Web.Services.Intefaces;
+using Web.Helpers.Interfaces;
+using Web.Services.Interfaces;
 
 namespace Web.Services
 {
@@ -21,6 +21,12 @@ namespace Web.Services
             var images = await this._imageRepository.GetAllAsync();
             
             return images;
+        }
+
+        public async Task<IReadOnlyCollection<Image>> GetProductImage(int id)
+        {
+            var image = await this._imageRepository.GetAllAsync();
+            return image;
         }
     }
 }

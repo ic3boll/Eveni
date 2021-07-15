@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Web.Models.Order;
 
-namespace Web.Services.Intefaces
+namespace Web.Services.Interfaces
 {
    public interface IOrderServices
     {

@@ -1,12 +1,9 @@
 ﻿using ApplicationCore.Entities;
 using ApplicationCore.Interfaces.Repositories;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Web.Models.Order;
-using Web.Services.Intefaces;
+using Web.Services.Interfaces;
 
 namespace Web.Controllers
 {
