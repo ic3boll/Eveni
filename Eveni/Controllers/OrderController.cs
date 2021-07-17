@@ -26,6 +26,11 @@ namespace Web.Controllers
      public async Task< IActionResult> Complete(OrderDetailInputModel orderDetailInput)
      {
             var items = Request.Cookies["CookieCart"];
+            if (items == null)
+            {
+
+                return RedirectToAction("Home", "Home");
+            }
             var CookieId = Request.Cookies["UserID"];
 
            await _orderServices.CreateAsync(orderDetailInput,items, CookieId);

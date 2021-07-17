@@ -26,6 +26,11 @@ namespace Web.Controllers
         [Route("index")]
         public IActionResult Index()
         {
+          if(Request.Cookies["CookieCart"]==null)
+            {
+
+                return RedirectToAction("Home", "Home");
+            }
             var CookiCart = JsonConvert.DeserializeObject<List<Item>>(Request.Cookies["CookieCart"]);
             ViewBag.cart = CookiCart;
             ViewBag.total = CookiCart.Sum(item => item.Product.Price * item.Quantity);
