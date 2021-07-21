@@ -1,11 +1,14 @@
 ﻿using ApplicationCore.Entities.Enums;
 using Microsoft.AspNetCore.Http;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace Web.Models.Product
+namespace Web.Models.Products
 {
-    public class ProductInputModel
+    public class ProductEditModel
     {
         [DataType(DataType.Text)]
         [Required(ErrorMessage = "Please enter name"), MaxLength(30)]
@@ -22,15 +25,16 @@ namespace Web.Models.Product
         public sbyte Rate { get; set; }
         [Required(ErrorMessage = "Choose SEX for this Product")]
         public SexEnum Sex { get; set; }
-        [Range(0,double.MaxValue,ErrorMessage ="Enter Price for this Product")]
+        [Range(0, double.MaxValue, ErrorMessage = "Enter Price for this Product")]
         public double Price { get; set; }
-        [Required(ErrorMessage ="Enter Brand for this Product")]
+        [Required(ErrorMessage = "Enter Brand for this Product")]
         public string Brand { get; set; }
-        [Required(ErrorMessage ="Choose Priority for this Product image")]
+        [Required(ErrorMessage = "Choose Priority for this Product image")]
         public ImageEnum imageEnum { get; set; }
-        [Required(ErrorMessage ="Choose a picture for this Product")]
+        [Required(ErrorMessage = "Choose a picture for this Product")]
         public IFormFile ImageFile { get; set; }
         [Required(ErrorMessage = "Choose Category for this Product")]
         public CategoryEnum Category { get; set; }
+
     }
 }

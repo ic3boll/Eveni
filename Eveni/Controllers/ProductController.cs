@@ -3,12 +3,10 @@ using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using System.Linq;
 using System.Threading.Tasks;
 using Web.Helpers.Interfaces;
-using Web.Models.Product;
+using Web.Models.Products;
 using Web.Services.Interfaces;
-using Web.ViewModels.Images;
 using Web.ViewModels.Products;
 using Web.ViewModels.Services.Interfaces;
 
@@ -72,7 +70,12 @@ namespace Web.Controllers
         public async Task<IActionResult> Edit(int id)
         {
             var productId = await _productServices.GetIdAsync(id);
+            var images = await _imageServices.GetProductImage(id);
+
             var productViewModel = _mapper.Map<ProductEditViewModel>(productId);
+            var productImage = _viewModelServices.EditProductImageCollection(images, id);
+
+            ViewData["Images"] = productImage;
             ViewData["Product"] = productViewModel;
             return View();
         }
@@ -100,6 +103,12 @@ namespace Web.Controllers
             await _productServices.DeleteAsync(id);
 
             return RedirectToAction("Home", "Home");
+        }
+
+        public async Task<IActionResult> RemoveImage(int id)
+        {
+            await _imageServices.RemoveImage(id);
+            return RedirectToAction("AllProducts", "Manager");
         }
 
 

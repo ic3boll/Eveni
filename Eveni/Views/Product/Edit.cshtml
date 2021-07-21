@@ -1,92 +1,142 @@
-﻿@model Web.Models.Product.ProductEditModel
+﻿@model Web.Models.Products.ProductEditModel
+@using Web.ViewModels.Images
 @using ApplicationCore.Entities.Enums
 @using Web.ViewModels.Products
 @{
+    var counter = 0;
 
-    
+    var images = (List<ImageEditViewModel>)ViewData["Images"];
 
     var product = (ProductEditViewModel)ViewData["Product"];
 }
 
-<div class="row">
-    <form asp-action="Edit" enctype="multipart/form-data">
-        <div class="form-group">
-            <label asp-for="Name" class="control-label"></label>
-            <input asp-for="Name" class="form-control" value="@product.Name" />
-            <span asp-validation-for="Name" class="text-danger"></span>
+<div class="container" style="width:30%">
+
+    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+        <div class="carousel-indicators">
+            @for (int i = 0; i < images.Count; i++)
+            {
+                @if (i == 0)
+                {
+                    <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="@i" class="active" aria-current="true" aria-label="Slide @i"></button>
+                    continue;
+                }
+
+                <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="@i" aria-label="Slide @i"></button>
+            }
         </div>
-        <div class="form-group">
-            <label asp-for="Size" class="control-label"></label>
-            <input asp-for="Size" class="form-control" value="@product.Size" />
-            <span asp-validation-for="Size" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <label asp-for="Color" class="control-label"></label>
-            <input asp-for="Color" class="form-control"value="@product.Color" />
-            <span asp-validation-for="Color" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <label asp-for="Price" class="control-label"></label>
-            <input asp-for="Price" class="form-control" value="@product.Price" />
-            <span asp-validation-for="Price" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <label asp-for="Rate" class="control-label"></label>
-            <input asp-for="Rate" class="form-control"value="@product.Rate" />
-            <span asp-validation-for="Rate" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <label asp-for="Category" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
-                <select asp-for="Category" asp-items="Html.GetEnumSelectList<CategoryEnum>()" >
-                    <option selected="selected" value="">@product.Category</option>
-                </select>
-                <span asp-validation-for="Category" class="text-danger" />
+        <div class="carousel-inner">
+            @foreach (var item in images)
+            {
+                @if (counter == 0)   
+                {
+            <div class="carousel-item active">
+                
+                <img class="d-block w-100" src="@item.ImageUrl" alt="0 slide">
+                <div class="carousel-caption d-none d-md-block">
+                    <a asp-action="RemoveImage" asp-route-id="@item.Id">Remove</a>
+                </div>
+
+            </div>
+                    counter++;
+                    continue;
+                }
+        <div class="carousel-item ">
+            <img class="d-block w-100" src="@item.ImageUrl" alt="First slide">
+            <div class="carousel-caption d-none d-md-block">
+             <!--   <a asp-action="Edit" asp-route-id="@@item.Id">Edit</a> -->
             </div>
         </div>
-        <div class="form-group">
-            <label asp-for="imageEnum" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
-                <select asp-for="imageEnum" asp-items="Html.GetEnumSelectList<ImageEnum>()">
-                    <option selected="selected" value="">@product.ImageEnum</option>
-                </select>
-                <span asp-validation-for="imageEnum" class="text-danger" />
-            </div>
+            }
         </div>
-        <div class="form-group">
-            <label asp-for="Sex" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
-                <select asp-for="Sex" asp-items="Html.GetEnumSelectList<SexEnum>()">
-                    <option selected="selected" value="">@product.SexEnum</option>
-                </select>
-                <span asp-validation-for="Sex" class="text-danger" />
+        <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+    <div class="row">
+        <form asp-action="Edit" enctype="multipart/form-data">
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" value="@product.Name" />
+                <span asp-validation-for="Name" class="text-danger"></span>
             </div>
-        </div>
-        <div class="form-group">
-            <div class="col-md-10">
-                <div class=" form-control-static">
-                    <p>Upload one or more files using this form:</p>
-                    <input type="file" name="ImageFile" multiple />
+            <div class="form-group">
+                <label asp-for="Size" class="control-label"></label>
+                <input asp-for="Size" class="form-control" value="@product.Size" />
+                <span asp-validation-for="Size" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Color" class="control-label"></label>
+                <input asp-for="Color" class="form-control" value="@product.Color" />
+                <span asp-validation-for="Color" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Price" class="control-label"></label>
+                <input asp-for="Price" class="form-control" value="@product.Price" />
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Rate" class="control-label"></label>
+                <input asp-for="Rate" class="form-control" value="@product.Rate" />
+                <span asp-validation-for="Rate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Category" class="col-md-2 control-label"></label>
+                <div class="col-md-10">
+                    <select asp-for="Category" asp-items="Html.GetEnumSelectList<CategoryEnum>()">
+                        <option selected="selected" value="">@product.Category</option>
+                    </select>
+                    <span asp-validation-for="Category" class="text-danger" />
                 </div>
             </div>
-        </div>
-        <div>
             <div class="form-group">
-
-
+                <label asp-for="imageEnum" class="col-md-2 control-label"></label>
+                <div class="col-md-10">
+                    <select asp-for="imageEnum" asp-items="Html.GetEnumSelectList<ImageEnum>()">
+                        <option selected="selected" value="">@product.ImageEnum</option>
+                    </select>
+                    <span asp-validation-for="imageEnum" class="text-danger" />
+                </div>
             </div>
-        </div>
-        <div class="form-group">
-            <label asp-for="Brand" class="control-label"></label>
-            <input asp-for="Brand" class="form-control" value="@product.Brand" />
-            <span asp-validation-for="Brand" class="text-danger"></span>
-        </div>
-    
+            <div class="form-group">
+                <label asp-for="Sex" class="col-md-2 control-label"></label>
+                <div class="col-md-10">
+                    <select asp-for="Sex" asp-items="Html.GetEnumSelectList<SexEnum>()">
+                        <option selected="selected" value="">@product.SexEnum</option>
+                    </select>
+                    <span asp-validation-for="Sex" class="text-danger" />
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-10">
+                    <div class=" form-control-static">
+                        <p>Upload one or more files using this form:</p>
+                        <input type="file" name="ImageFile" multiple />
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="form-group">
 
-        <div class="form-group-lg">
-            <input type="submit" value="Edit Product" class="btn btn-group" />
-        </div>
 
-    </form>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="Brand" class="control-label"></label>
+                <input asp-for="Brand" class="form-control" value="@product.Brand" />
+                <span asp-validation-for="Brand" class="text-danger"></span>
+            </div>
+
+
+            <div class="form-group-lg">
+                <input type="submit" value="Edit Product" class="btn btn-group" />
+            </div>
+
+        </form>
+    </div>
 </div>
-

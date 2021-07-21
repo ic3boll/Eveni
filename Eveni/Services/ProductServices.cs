@@ -1,17 +1,12 @@
 ﻿using ApplicationCore.Entities;
-using ApplicationCore.Interfaces;
 using ApplicationCore.Interfaces.Repositories;
 using AutoMapper;
-using Microsoft.AspNetCore.Identity;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Web.Helpers.Interfaces;
-using Web.Models;
-using Web.Models.Product;
+using Web.Models.Products;
 using Web.Services.Interfaces;
-using Web.ViewModels.Products;
 
 namespace Web.Services
 {

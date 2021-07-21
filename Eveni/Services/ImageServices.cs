@@ -28,5 +28,11 @@ namespace Web.Services
             var image = await this._imageRepository.GetAllAsync();
             return image;
         }
+
+        public async Task RemoveImage(int id)
+        {
+            var tbdeleted = await this._imageRepository.GetByIdAsync(id);
+            await this._imageRepository.RemoveAsync(tbdeleted);
+        }
     }
 }

@@ -11,5 +11,7 @@ namespace Web.Services.Interfaces
         public Task<IReadOnlyCollection<Image>> GetAllAsync();
 
         public Task<IReadOnlyCollection<Image>> GetProductImage(int id);
+
+        public Task RemoveImage(int id);
     }
 }

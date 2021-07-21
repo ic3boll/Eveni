@@ -51,6 +51,17 @@ namespace Web.ViewModels.Services
             return listOfImages;
         }
 
+        public List<ImageEditViewModel> EditProductImageCollection(IReadOnlyCollection<Image> images, int id)
+        {
+            var listOfImages = new List<ImageEditViewModel>();
+            foreach (var item in images.Where(i => i.ProductId == id))
+            {
+                var image = _mapper.Map<ImageEditViewModel>(item);
+                listOfImages.Add(image);
+            }
+            return listOfImages;
+        }
+
     }
 }
 

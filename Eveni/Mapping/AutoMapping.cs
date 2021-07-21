@@ -1,10 +1,8 @@
 ﻿using ApplicationCore.Entities;
 using AutoMapper;
-using System;
 using System.Collections.Generic;
-using Web.Models;
 using Web.Models.Order;
-using Web.Models.Product;
+using Web.Models.Products;
 using Web.ViewModels.Images;
 using Web.ViewModels.Products;
 
@@ -47,6 +45,9 @@ namespace Web.Mapping
 
             CreateMap<ImageViewModel, Image>();
             CreateMap<Image, ImageViewModel>();
+
+            CreateMap<ImageEditViewModel, Image>();
+            CreateMap<Image, ImageEditViewModel>();
 
         }
 

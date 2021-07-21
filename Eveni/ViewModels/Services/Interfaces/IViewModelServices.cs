@@ -13,5 +13,8 @@ namespace Web.ViewModels.Services.Interfaces
         public List<ImageViewModel> SetImageCollection(IReadOnlyCollection<Image> images);
 
         public List<ImageViewModel> SetProductImageCollection(IReadOnlyCollection<Image> images, int id);
+
+
+        public List<ImageEditViewModel> EditProductImageCollection(IReadOnlyCollection<Image> images, int id);
     }
 }
