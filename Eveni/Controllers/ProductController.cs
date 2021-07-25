@@ -96,15 +96,16 @@ namespace Web.Controllers
             return RedirectToAction("Home", "Home");
         }
         
-       // [ValidateAntiForgeryToken]
-       // [Authorize]
+        [Authorize]
         public async Task<IActionResult> Delete(int id)
         {
             await _productServices.DeleteAsync(id);
 
             return RedirectToAction("Home", "Home");
         }
+        
 
+        [Authorize]
         public async Task<IActionResult> RemoveImage(int id)
         {
             await _imageServices.RemoveImage(id);
