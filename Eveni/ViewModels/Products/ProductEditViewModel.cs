@@ -30,7 +30,7 @@ namespace Web.ViewModels.Products
         public ImageEnum ImageEnum { get; set; }
         public CategoryEnum Category { get; set; }
 
-        public SexEnum SexEnum { get; set; }
+        public SexEnum Sex { get; set; }
        
 
     }
