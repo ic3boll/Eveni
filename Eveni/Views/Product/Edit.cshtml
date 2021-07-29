@@ -154,7 +154,7 @@
             $("select").on('change', function () {
                 var id = $(this).children().val();
                 var data = $('option:selected', this).val();
-                var test = $('option:selected', this).text();
+                var alertOutPut = $('option:selected', this).text();
                 var Edited = ({
                     "Id": (+id),
                     "imageEnum": (+data)
@@ -166,7 +166,7 @@
                     contentType: "application/json; charset=utf-8",
 
                     success: function () {
-                        alert('successfully updated ImageEnum to ' + test);
+                        alert('successfully updated ImageEnum to ' + alertOutPut);
                     },
                     error: function (xhr) {
                         alert('Something went wrong ' + xhr.status + " ID= " + id + " Data= " + data);
