@@ -1,7 +1,10 @@
-﻿using AutoMapper;
+﻿using ApplicationCore.Entities;
+using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Web.Services.Interfaces;
 using Web.ViewModels.Services.Interfaces;
@@ -38,6 +41,13 @@ namespace Web.Controllers
 
             var ProductViewBag = _viewModelServices.SetProductCollection(products);
             var ImageViewBag = _viewModelServices.SetImageCollection(images);
+
+            if (Request.Cookies["CookieCart"] != null)
+            {
+
+                var CookiCart = JsonConvert.DeserializeObject<List<Item>>(Request.Cookies["CookieCart"]);
+                ViewBag.cart = CookiCart;
+            }
 
 
             ViewData["Products"] = ProductViewBag;
