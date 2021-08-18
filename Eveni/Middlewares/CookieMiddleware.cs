@@ -26,8 +26,8 @@ namespace Web.Middlewares
         public async Task InvokeAsync(
              HttpContext context)
         {
-
-            Set();
+          var ip =  context.Request.HttpContext.Connection.RemoteIpAddress;
+            Set(ip);
             //  HttpContext.Request.Cookies["site_user"];
 
             await this._next(context);
@@ -36,20 +36,23 @@ namespace Web.Middlewares
         }
 
         [Obsolete]
-        public void Set()
+        public void Set(System.Net.IPAddress ip)
         {
             string cookieValueFromContext = _httpContextAccessor.HttpContext.Request.Cookies["site_user"];
             if (cookieValueFromContext == null)
             {
-                // string UserId = "site_user";
+                 string UserId = "site_user";
                 string cookieValue = Guid.NewGuid().ToString();
+
                 HttpCookie userIdCookie = new HttpCookie
                 {
                     Value = cookieValue,
-                    Expires = DateTime.Now.AddMinutes(1)
+                    Expires = DateTime.Now.AddMinutes(1),
+                    Comment = ip.ToString()
+                    
                 };
 
-                //   HttpContext.Response.Cookies.Append(UserId, userIdCookie.Value);
+                  _httpContextAccessor.HttpContext.Response.Cookies.Append(UserId, userIdCookie.Value);
             }
         }
     }

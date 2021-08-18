@@ -19,6 +19,8 @@ namespace Infrastructure.Migrations
         public DbSet<Order_Detail> Order_Details{ get; set; }
 
         public DbSet<Image> Images { get; set; }
+
+        public DbSet<OrderSecurity> OrderSecurity { get; set; }
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);

@@ -106,11 +106,13 @@ namespace Web
             }
             app.Use(async (context, next) =>
             {
+                var visitorsIpAddr = context.Request.HttpContext.Connection.RemoteIpAddress;
                 var User = context.Request.Cookies["UserID"];
-
+          
                 if (User == null)
                 {
                     string cookieValue = Guid.NewGuid().ToString();
+                  
                     var cookieOptions = new CookieOptions()
                     {
                         Path = "/",
@@ -119,7 +121,7 @@ namespace Web
                         HttpOnly = false,
                         Secure = false,
                     };
-                    context.Response.Cookies.Append("UserID", cookieValue, cookieOptions);
+                    context.Response.Cookies.Append("UserID", visitorsIpAddr.MapToIPv4().ToString(), cookieOptions);
 
                 }
                 await next();
@@ -127,7 +129,7 @@ namespace Web
 
             });
             app.UseCookiePolicy();
-            //    app.UseCookieMiddleware();
+               // app.UseCookieMiddleware();
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();

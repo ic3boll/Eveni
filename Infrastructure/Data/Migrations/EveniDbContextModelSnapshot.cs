@@ -130,6 +130,24 @@ namespace Infrastructure.Data.Migrations
                     b.ToTable("Orders");
                 });
 
+            modelBuilder.Entity("ApplicationCore.Entities.OrderSecurity", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("Ip")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("TimePlaced")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("OrderSecurity");
+                });
+
             modelBuilder.Entity("ApplicationCore.Entities.Order_Detail", b =>
                 {
                     b.Property<int>("Id")
