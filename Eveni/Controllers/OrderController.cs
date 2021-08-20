@@ -1,6 +1,7 @@
 ﻿using ApplicationCore.Entities;
 using ApplicationCore.Interfaces.Repositories;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Threading.Tasks;
 using Web.Models.Order;
 using Web.Services.Interfaces;
@@ -17,26 +18,25 @@ namespace Web.Controllers
             this._orderServices = orderServices;
             this._OrderRepository = OrderRepository;
         }
-  
+
         public IActionResult Complete()
         {
             return View("Order");
         }
-     [HttpPost]
-     public async Task< IActionResult> Complete(OrderDetailInputModel orderDetailInput)
-     {
+        [HttpPost]
+        public async Task<IActionResult> Complete(OrderDetailInputModel orderDetailInput)
+        {
             var items = Request.Cookies["CookieCart"];
             if (items == null)
             {
 
                 return RedirectToAction("Home", "Home");
             }
-            var CookieId = Request.Cookies["UserID"];
-            
+            var UserId = Request.Cookies["UserID"];
 
-           await _orderServices.CreateAsync(orderDetailInput,items, CookieId);
+            await _orderServices.CreateAsync(orderDetailInput, items, UserId);
 
-         return RedirectToAction("Home", "Home");
-     }
+            return RedirectToAction("Home", "Home");
+        }
     }
 }
