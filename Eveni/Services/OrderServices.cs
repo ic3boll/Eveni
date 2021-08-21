@@ -26,8 +26,13 @@ namespace Web.Services
 
         public async Task CreateAsync(OrderDetailInputModel odim, string items, string UserId)
         {
+<<<<<<< .mine
             int count = 0;
             Order_Detail order_Detail = _mapper.Map<Order_Detail>(odim);
+=======
+
+            Order_Detail order_Detail = _mapper.Map<Order_Detail>(odim);
+>>>>>>> .theirs
             order_Detail.CookieId = UserId;
 
             Order order = new Order
@@ -39,6 +44,7 @@ namespace Web.Services
             // RAW !
             var ip = await _orderSecurityRepository.GetAllAsync();
 
+<<<<<<< .mine
             var ipToAdd = new OrderSecurity();
             ipToAdd.Ip = UserId;
             ipToAdd.TimePlaced = DateTime.Now;
@@ -63,10 +69,24 @@ namespace Web.Services
             {
                 await _orderSecurityRepository.AddAsync(ipToAdd);
             }
-            await _orderRepository.AddAsync(order);
 
 
-           // CheckForExistingIp(UserId, ip, ipToAdd, order);
+
+
+
+
+
+
+
+
+
+=======
+            var ipToAdd = new OrderSecurity();
+            ipToAdd.Ip = UserId;
+            ipToAdd.TimePlaced = DateTime.Now;
+
+         
+            CheckForExistingIp(UserId, ip, ipToAdd, order);
 
            
 
@@ -74,10 +94,63 @@ namespace Web.Services
 
         private async void CheckForExistingIp(string userId, IReadOnlyCollection<OrderSecurity> ip, OrderSecurity ipToAdd, Order order, int count = 0)
         {
+            foreach (var item in ip)
+            {
+                if (item.Ip != userId)
+                {
+                    count++;
+                }
+
+            }
+            //Check for existing if not add
+            if (count == ip.Count)
+            {
+                await _orderSecurityRepository.AddAsync(ipToAdd);
+            }
+            //if existed check for hour placement then add
+            else if (ipToAdd.TimePlaced.Hour < DateTime.Now.Hour)
+            {
+                await _orderSecurityRepository.AddAsync(ipToAdd);
+            }
+            else
+            {
+                throw new ArgumentException("too much added");
+            }
+>>>>>>> .theirs
+            await _orderRepository.AddAsync(order);
+<<<<<<< .mine
+
+
+           // CheckForExistingIp(UserId, ip, ipToAdd, order);
+
+           
+
+=======
+
+
+
+
+
+
+>>>>>>> .theirs
+        }
+
+<<<<<<< .mine
+        private async void CheckForExistingIp(string userId, IReadOnlyCollection<OrderSecurity> ip, OrderSecurity ipToAdd, Order order, int count = 0)
+        {
            
 
         }
 
        
+=======
+       
+
+
+
+
+
+
+>>>>>>> .theirs
     }
 }
