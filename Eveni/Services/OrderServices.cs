@@ -55,7 +55,8 @@ namespace Web.Services
             if (count == ip.Count)
             {
                 await _orderSecurityRepository.AddAsync(ipToAdd);
-            }
+            } 
+
             //if existed check for hour placement then add
            
             else if (ipToAdd.TimePlaced.Hour < DateTime.Now.Hour)
