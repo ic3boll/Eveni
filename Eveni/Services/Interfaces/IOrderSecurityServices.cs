@@ -1,5 +1,4 @@
-﻿<<<<<<< .mine
-using ApplicationCore.Entities;
+﻿using ApplicationCore.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,21 +14,3 @@ namespace Web.Services.Interfaces
     
     }
 }
-=======
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace Web.Services.Interfaces
-{
-   public interface IOrderSecurityServices
-    {
-
-    }
-}
-
-
-
-
->>>>>>> .theirs

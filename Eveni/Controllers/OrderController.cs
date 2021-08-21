@@ -34,38 +34,10 @@ namespace Web.Controllers
             }
             var UserId = Request.Cookies["UserID"];
 
-<<<<<<< .mine
             await _orderServices.CreateAsync(orderDetailInput, items, UserId);
-
-=======
-            try
-            {
->>>>>>> .theirs
-
-<<<<<<< .mine
-            return RedirectToAction("Home", "Home");
-        }
-
-
-
-
-
-
-
-
-
-=======
-                await _orderServices.CreateAsync(orderDetailInput, items, UserId);
-            }
-            catch (System.ArgumentException)
-            {
-
-
-                return RedirectToAction("Home", "Home");
-            }
+            //asd
 
             return RedirectToAction("Home", "Home");
         }
->>>>>>> .theirs
     }
 }
