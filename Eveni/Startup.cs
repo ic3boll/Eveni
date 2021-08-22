@@ -37,8 +37,10 @@ namespace Web
             services.AddScoped(typeof(IProductServices), typeof(ProductServices));
             services.AddScoped(typeof(IViewModelServices), typeof(ViewModelServices));
             services.AddScoped(typeof(IOrderServices), typeof(OrderServices));
+            services.AddScoped(typeof(IOrderSecurityServices), typeof(OrderSecurityServices));
             services.AddScoped(typeof(IImageHelper), typeof(ImageHelper));
             services.AddScoped(typeof(IImageServices), typeof(ImageServices));
+       
             services.AddAutoMapper(typeof(Startup));
             services.AddControllersWithViews();
             services.AddDistributedMemoryCache();

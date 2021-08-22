@@ -52,11 +52,11 @@ namespace Infrastructure.Data
 
         public async Task RemoveAsync(T entity)
         {
-            if(entity == null)
+            if (entity == null)
             {
                 throw new ArgumentNullException("entity");
             }
-             _dbContext.Remove(entity);
+            _dbContext.Remove(entity);
             await _dbContext.SaveChangesAsync();
         }
 
@@ -66,7 +66,7 @@ namespace Infrastructure.Data
             _dbContext.Entry(entity).State = EntityState.Modified;
 
             await _dbContext.SaveChangesAsync();
-         
+
         }
     }
 }

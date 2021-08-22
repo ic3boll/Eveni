@@ -14,7 +14,7 @@ namespace Web.Services
     {
         private readonly IAsyncRepository<Order> _orderRepository;
         private readonly IAsyncRepository<OrderSecurity> _orderSecurityRepository;
-        private readonly IMapper _mapper;
+        public readonly IMapper _mapper;
         public OrderServices(IAsyncRepository<Order> orderRepository,
             IMapper mapper,
             IAsyncRepository<OrderSecurity> orderSecurityRepository)
@@ -26,7 +26,9 @@ namespace Web.Services
 
         public async Task CreateAsync(OrderDetailInputModel odim, string items, string UserId)
         {
-            int count = 0;
+            var ipToAdd = new OrderSecurity();
+            var ip = await _orderSecurityRepository.GetAllAsync();
+
             Order_Detail order_Detail = _mapper.Map<Order_Detail>(odim);
             order_Detail.CookieId = UserId;
 
@@ -36,43 +38,27 @@ namespace Web.Services
                 CookieID = UserId,
                 Items = items
             };
-            // RAW !
-            var ip = await _orderSecurityRepository.GetAllAsync();
-
-            var ipToAdd = new OrderSecurity();
-            ipToAdd.Ip = UserId;
-            ipToAdd.TimePlaced = DateTime.Now;
-
             foreach (var item in ip)
             {
-                if (item.Ip != UserId)
+                if (item.Ip == UserId)
                 {
-                    count++;
+                    ipToAdd = _mapper.Map<OrderSecurity>(item);
+                    if (ipToAdd.TimePlaced.Minute != DateTime.Now.Minute)
+                    {
+                        ipToAdd.TimePlaced = DateTime.Now;
+                        await this._orderSecurityRepository.UpdateAsync(ipToAdd);
+                        await this._orderRepository.AddAsync(order);
+                    }
+
                 }
-
             }
-            //Check for existing if not add
-            if (count == ip.Count)
+            if(ipToAdd.Ip == null)
             {
-                await _orderSecurityRepository.AddAsync(ipToAdd);
-            } 
-
-            //if existed check for hour placement then add
-           
-            else if (ipToAdd.TimePlaced.Hour < DateTime.Now.Hour)
-            {
-                await _orderSecurityRepository.AddAsync(ipToAdd);
+                ipToAdd.Ip = UserId;
+                ipToAdd.TimePlaced = DateTime.Now;
+                await this._orderSecurityRepository.AddAsync(ipToAdd);
+                await this._orderRepository.AddAsync(order);
             }
-            await _orderRepository.AddAsync(order);
-
-
-           // CheckForExistingIp(UserId, ip, ipToAdd, order);
-
-           
-
         }
-
-
-       
     }
 }
