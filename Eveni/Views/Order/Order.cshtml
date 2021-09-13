@@ -1,8 +1,8 @@
 ﻿@model Web.Models.Order.OrderDetailInputModel
 
 <div class="row">
-    <form asp-action="Complete">
-    
+    <form id="orderForm">
+
         <div class="form-group">
             <label asp-for=Name class="control-label"></label>
             <input asp-for="Name" class="form-control" />
@@ -38,11 +38,44 @@
             <input asp-for="Comment" class="form-control" />
             <span asp-validation-for="Comment" class="text-danger"></span>
         </div>
-    
-        <div class="form-group-lg">
-            <input type="submit" value="Complete Order" class="btn btn-group" />
-        </div>
-
+        <button type="submit" class="btn btn-success">
+            Submit
+        </button>
     </form>
+    <p>Click on this paragraph.</p>
+
+
 </div>
 
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $("form").submit(function (event) {
+
+                var data = $("#orderForm").serialize();
+                alert(data); 
+                event.preventDefault();
+                $.ajax({
+                    type: 'POST',
+                    url: "/Order/Complete",
+                    data: data,
+                    async: true,
+               
+                    success: function (response) {
+                        if (response != null) {
+                            alert("success");
+                        } else {
+                            alert("Something went wrong");
+                        }
+                    },
+                    failure: function (response) {
+                        alert(response.responseText);
+                    },
+                    error: function (response) {
+                        alert(response.responseJSON);
+                    }
+                });
+            });
+        });
+    </script>
+}

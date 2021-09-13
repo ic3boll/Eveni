@@ -25,19 +25,21 @@ namespace Web.Controllers
         }
         [HttpPost]
         public async Task<IActionResult> Complete(OrderDetailInputModel orderDetailInput)
-        {
-            var items = Request.Cookies["CookieCart"];
-            if (items == null)
             {
+            if (ModelState.IsValid)
+            {
+             
+                var items = Request.Cookies["CookieCart"];
+                if (items == null)
+                {
+                    return BadRequest();
+                }
+                var UserId = Request.Cookies["UserID"];
 
-                return RedirectToAction("Home", "Home");
+               await _orderServices.CreateAsync(orderDetailInput, items, UserId);
             }
-            var UserId = Request.Cookies["UserID"];
+            return Ok();
 
-            await _orderServices.CreateAsync(orderDetailInput, items, UserId);
-            //asd
-
-            return RedirectToAction("Home", "Home");
         }
     }
 }

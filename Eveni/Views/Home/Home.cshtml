@@ -6,14 +6,17 @@
     var images = (List<ImageViewModel>)ViewData["Images"];
     var fashion = CategoryEnum.Fashion;
     var imageEnumCheck = ImageEnum.Primary;
- 
+
+    var data = TempData["Order"];
+
 
 }
+
 @foreach (var item in products)
 {
     if (item.Category.Equals(fashion))
     {
-        <div class="row" >
+        <div class="row">
             <div class="col-sm-6 col-md-3">
                 <div class="thumbnail">
                     <label>Name: </label>
@@ -42,5 +45,10 @@
     }
 
 }
-
-
+@section Scripts {
+    <script>
+        function myFunction() {
+            alert("Succesfully Created Order");
+        }
+    </script>
+}

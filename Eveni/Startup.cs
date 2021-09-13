@@ -40,7 +40,7 @@ namespace Web
             services.AddScoped(typeof(IOrderSecurityServices), typeof(OrderSecurityServices));
             services.AddScoped(typeof(IImageHelper), typeof(ImageHelper));
             services.AddScoped(typeof(IImageServices), typeof(ImageServices));
-       
+
             services.AddAutoMapper(typeof(Startup));
             services.AddControllersWithViews();
             services.AddDistributedMemoryCache();
@@ -83,7 +83,7 @@ namespace Web
                 .AddIdentityServerJwt();
             services.AddControllersWithViews();
             services.AddRazorPages();
-            
+
 
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
@@ -110,11 +110,11 @@ namespace Web
             {
                 var visitorsIpAddr = context.Request.HttpContext.Connection.RemoteIpAddress;
                 var User = context.Request.Cookies["UserID"];
-          
+
                 if (User == null)
                 {
                     string cookieValue = Guid.NewGuid().ToString();
-                  
+
                     var cookieOptions = new CookieOptions()
                     {
                         Path = "/",
@@ -131,7 +131,7 @@ namespace Web
 
             });
             app.UseCookiePolicy();
-               // app.UseCookieMiddleware();
+            // app.UseCookieMiddleware();
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
@@ -152,8 +152,8 @@ namespace Web
                   name: "default",
                   template: "{controller=Home}/{action=Home}/{id?}");
 
-              
-           
+
+
 
                 //     routes.MapRoute(
                 //   name: "cart",

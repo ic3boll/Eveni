@@ -8,12 +8,12 @@ namespace Web.Models.Account
 {
     public class RegisterInputModel
     {
-        [Required(ErrorMessage ="Enter UserName")]
+        [Required(ErrorMessage = "Enter UserName")]
         public string UserName { get; set; }
 
         [DataType(DataType.EmailAddress)]
         [Required(ErrorMessage = "Please enter Email ID")]
-        [RegularExpression(@"^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$", ErrorMessage = "Email is not valid.")]
+        [EmailAddress]
         public string Email { get; set; }
 
         [Required]
