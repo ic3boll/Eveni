@@ -18,6 +18,7 @@ using Microsoft.AspNetCore.Http;
 using System;
 using Web.Helpers;
 using Web.Helpers.Interfaces;
+using System.Web.Http;
 
 namespace Web
 {
@@ -61,7 +62,11 @@ namespace Web
                     Configuration.GetConnectionString("DefaultConnection")));
 
 
-            services.AddMvc(option => option.EnableEndpointRouting = false);
+            services.AddMvc(option => option.EnableEndpointRouting = false
+
+
+            );
+            
 
             services.AddIdentity<ApplicationUser, IdentityRole>(opt =>
             {
@@ -146,21 +151,22 @@ namespace Web
             //   app.UseIdentityServer();
             app.UseAuthorization();
 
+
             app.UseMvc(routes =>
             {
-                routes.MapRoute(
+
+            routes.MapRoute(
                   name: "default",
                   template: "{controller=Home}/{action=Home}/{id?}");
 
 
+                routes.MapRoute(
+              name: "DefaultApi",
+              template: "api/{controller}/{category}",
+                  defaults: new { category = "all" });
 
 
-                //     routes.MapRoute(
-                //   name: "cart",
-                //   template: "{controller=Cart}/{action=Index}/{id?}");
-
-
-            });
+         });
         }
     }
 }

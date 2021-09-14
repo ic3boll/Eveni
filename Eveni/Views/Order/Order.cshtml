@@ -51,16 +51,14 @@
     <script>
         $(document).ready(function () {
             $("form").submit(function (event) {
-
                 var data = $("#orderForm").serialize();
-                alert(data); 
+                alert(data);
                 event.preventDefault();
                 $.ajax({
                     type: 'POST',
-                    url: "/Order/Complete",
+                    url: "/api/Order/post",
+                    dataType: 'json', 
                     data: data,
-                    async: true,
-               
                     success: function (response) {
                         if (response != null) {
                             alert("success");
@@ -69,10 +67,10 @@
                         }
                     },
                     failure: function (response) {
-                        alert(response.responseText);
+                        alert(response.responseText+ " fail");
                     },
                     error: function (response) {
-                        alert(response.responseJSON);
+                        alert(response.responseJSON + " error" + data);
                     }
                 });
             });
