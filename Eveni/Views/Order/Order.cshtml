@@ -1,5 +1,5 @@
 ﻿@model Web.Models.Order.OrderDetailInputModel
-@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+@Html.ValidationSummary(false, "", new { @class = "text-danger" })
 <div class="row">
     <form id="orderForm">
 
@@ -57,14 +57,16 @@
                 $.ajax({
                     type: 'POST',
                     url: "/api/Order/post",
-                    dataType: 'json',
                     data: data,
                     success: function (response) {
-                        if (response != null) {
-                            alert("success");
-                        } else {
-                            alert("Something went wrong " );
-                        }
+                        alert(response + "You successfully created your orded");
+                        window.location = response;
+                    },
+                    failure: function (response) {
+                        alert(response + " fail");
+                    },
+                    error: function (response) {
+                        alert(response + " error");
                     }
                 });
             });
