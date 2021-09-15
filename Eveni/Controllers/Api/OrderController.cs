@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -36,13 +37,14 @@ namespace Web.Controllers.Api
                 var items = Request.Cookies["CookieCart"];
                 if (items == null)
                 {
-                    return BadRequest();
+                    return BadRequest(JsonConvert.SerializeObject(ModelState.Values.Select(e => e.Errors).ToList()));
                 }
                 var UserId = Request.Cookies["UserID"];
 
                 await _orderServices.CreateAsync(odim, items, UserId);
+                return Ok();
             }
-            return Ok();
+            return BadRequest(JsonConvert.SerializeObject(ModelState.Values.Select(e => e.Errors).ToList()));
         }
     }
 }
