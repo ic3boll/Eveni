@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Web.Helpers.Interfaces;
 using Web.Models.Order;
 using Web.Services.Interfaces;
 
@@ -15,13 +16,16 @@ namespace Web.Services
         private readonly IAsyncRepository<Order> _orderRepository;
         private readonly IAsyncRepository<OrderSecurity> _orderSecurityRepository;
         public readonly IMapper _mapper;
+        private readonly ICookieHelper _cookieHelper;
         public OrderServices(IAsyncRepository<Order> orderRepository,
             IMapper mapper,
-            IAsyncRepository<OrderSecurity> orderSecurityRepository)
+            IAsyncRepository<OrderSecurity> orderSecurityRepository,
+            ICookieHelper cookieHelper)
         {
             this._orderRepository = orderRepository;
             this._mapper = mapper;
             this._orderSecurityRepository = orderSecurityRepository;
+            this._cookieHelper = cookieHelper;
         }
 
         public async Task CreateAsync(OrderDetailInputModel odim, string items, string UserId)
@@ -31,6 +35,7 @@ namespace Web.Services
 
             Order_Detail order_Detail = _mapper.Map<Order_Detail>(odim);
             order_Detail.CookieId = UserId;
+            string cookieRequest = "CookieCart";
 
             Order order = new Order
             {
@@ -48,8 +53,8 @@ namespace Web.Services
                         ipToAdd.TimePlaced = DateTime.Now;
                         await this._orderSecurityRepository.UpdateAsync(ipToAdd);
                         await this._orderRepository.AddAsync(order);
+                        _cookieHelper.Remove(cookieRequest);
                     }
-
                 }
             }
             if(ipToAdd.Ip == null)
@@ -58,6 +63,7 @@ namespace Web.Services
                 ipToAdd.TimePlaced = DateTime.Now;
                 await this._orderSecurityRepository.AddAsync(ipToAdd);
                 await this._orderRepository.AddAsync(order);
+                _cookieHelper.Remove(cookieRequest);
             }
         }
     }

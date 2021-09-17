@@ -10,15 +10,16 @@ using Web.ViewModels.Products;
 using Web.Services.Interfaces;
 using Newtonsoft.Json;
 using RestSharp;
+using Web.Helpers.Interfaces;
 
 namespace Web.Controllers
 {
     public class CartController : Controller
     {
         private readonly IProductServices _productServices;
-        private readonly CookieHelper _cookieHelper;
+        private readonly ICookieHelper _cookieHelper;
         public CartController(IProductServices productServices,
-            CookieHelper cookieHelper)
+            ICookieHelper cookieHelper)
         {
             this._cookieHelper = cookieHelper;
             this._productServices = productServices;

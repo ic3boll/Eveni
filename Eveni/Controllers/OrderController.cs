@@ -3,6 +3,7 @@ using ApplicationCore.Interfaces.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;
+using Web.Helpers.Interfaces;
 using Web.Models.Order;
 using Web.Services.Interfaces;
 
@@ -28,13 +29,13 @@ namespace Web.Controllers
             {
             if (ModelState.IsValid)
             {
-             
                 var items = Request.Cookies["CookieCart"];
                 if (items == null)
                 {
                     return BadRequest();
                 }
                 var UserId = Request.Cookies["UserID"];
+
 
                await _orderServices.CreateAsync(orderDetailInput, items, UserId);
             }
