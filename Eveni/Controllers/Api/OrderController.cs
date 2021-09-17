@@ -42,7 +42,7 @@ namespace Web.Controllers.Api
                 var UserId = Request.Cookies["UserID"];
 
                 await _orderServices.CreateAsync(odim, items, UserId);
-                return Content(@"http://www.google.co.uk");
+                return Content(@"https://localhost:44398/");
             }
             return BadRequest(JsonConvert.SerializeObject(ModelState.Values.Select(e => e.Errors).ToList()));
         }
