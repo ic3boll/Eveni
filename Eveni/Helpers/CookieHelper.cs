@@ -52,15 +52,6 @@ namespace Web.Helpers
             };
             _httpContextAccessor.HttpContext.Response.Cookies.Append(cookieRequest,"", co);
         }
-
-<<<<<<< HEAD
-=======
-        public void Remove()
-        {
-
-        }
-
->>>>>>> 69be7186e6db8becd689a22ccfabdd39dae266e9
         private int isExist(int id)
         {
             var cart = JsonConvert.DeserializeObject<List<Item>>(_httpContextAccessor.HttpContext.Request.Cookies["CookieCart"]);

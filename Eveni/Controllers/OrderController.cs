@@ -11,13 +11,10 @@ namespace Web.Controllers
 {
     public class OrderController : Controller
     {
-        private IAsyncRepository<Order> _OrderRepository;
         private readonly IOrderServices _orderServices;
-        public OrderController(IAsyncRepository<Order> OrderRepository,
-            IOrderServices orderServices)
+        public OrderController(IOrderServices orderServices)
         {
             this._orderServices = orderServices;
-            this._OrderRepository = OrderRepository;
         }
 
         public IActionResult Complete()
