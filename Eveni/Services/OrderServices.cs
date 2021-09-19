@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Web.Helpers.Interfaces;
 using Web.Models.Order;
 using Web.Services.Interfaces;
+using Web.ViewModels.Orders;
 
 namespace Web.Services
 {
@@ -57,7 +58,7 @@ namespace Web.Services
                     }
                 }
             }
-            if(ipToAdd.Ip == null)
+            if (ipToAdd.Ip == null)
             {
                 ipToAdd.Ip = UserId;
                 ipToAdd.TimePlaced = DateTime.Now;
@@ -65,6 +66,14 @@ namespace Web.Services
                 await this._orderRepository.AddAsync(order);
                 _cookieHelper.Remove(cookieRequest);
             }
+        }
+
+        public async Task<IReadOnlyCollection<OrderViewModel>> GetUserOrdersAsync(string UserId)
+        {
+            var orders = await _orderRepository.GetAllAsync();
+            var userOrders = orders.Where(u => u.CookieID == UserId).ToList().AsReadOnly();
+            var mappedUserOrders = _mapper.Map<IReadOnlyCollection<OrderViewModel>>(orders);
+            return mappedUserOrders;
         }
     }
 }

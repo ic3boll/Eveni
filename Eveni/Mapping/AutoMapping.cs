@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Web.Models.Order;
 using Web.Models.Products;
 using Web.ViewModels.Images;
+using Web.ViewModels.Orders;
 using Web.ViewModels.Products;
 
 namespace Web.Mapping
@@ -48,6 +49,12 @@ namespace Web.Mapping
 
             CreateMap<ImageEditViewModel, Image>();
             CreateMap<Image, ImageEditViewModel>();
+
+            CreateMap<Order,OrderViewModel>();
+            CreateMap<OrderViewModel, Order>();
+
+            CreateMap<IReadOnlyCollection<OrderViewModel>, Order>();
+            CreateMap<Order, IReadOnlyCollection<OrderViewModel>>();
 
         }
 

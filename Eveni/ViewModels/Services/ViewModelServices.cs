@@ -6,6 +6,7 @@ using Web.ViewModels.Products;
 using ApplicationCore.Entities;
 using Web.ViewModels.Images;
 using System.Linq;
+using Web.ViewModels.Orders;
 
 namespace Web.ViewModels.Services
 {
@@ -60,6 +61,16 @@ namespace Web.ViewModels.Services
                 listOfImages.Add(image);
             }
             return listOfImages;
+        }
+
+        public List<OrderViewModel> SetUserOrdersCollection(IReadOnlyCollection<OrderViewModel> UserOrders)
+        {
+            var listOfUserOrders = new List<OrderViewModel>();
+            foreach (var item in UserOrders)
+            {
+                listOfUserOrders.Add(item);
+            }
+            return listOfUserOrders;
         }
 
     }

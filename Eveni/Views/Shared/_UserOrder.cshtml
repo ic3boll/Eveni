@@ -1,0 +1,19 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    var orderCount = 0;
+    if (ViewBag.userOrders != null)
+    {
+
+        orderCount = ViewBag.userOrders.Count;
+    }
+}
+<div id="cart" style="float:right">
+    <a asp-controller="Cart" asp-action="Index" aria-label="View your shopping cart">
+        <i class="fas fa-box-open"></i>
+        <span>
+            @orderCount
+        </span>
+    </a>
+</div>

@@ -6,11 +6,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Services\**" />
+    <EmbeddedResource Remove="Services\**" />
     <None Remove="C:\Users\Lyubomir\.nuget\packages\microsoft.net.compilers\1.0.0\build\..\tools\**" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Services\" />
+    <None Remove="Services\**" />
   </ItemGroup>
 
   <ItemGroup>

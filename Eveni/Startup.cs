@@ -129,7 +129,9 @@ namespace Web
                         HttpOnly = false,
                         Secure = false,
                     };
-                    context.Response.Cookies.Append("UserID", visitorsIpAddr.MapToIPv4().ToString(), cookieOptions);
+                  //  context.Response.Cookies.Append("UserID", visitorsIpAddr.MapToIPv4().ToString(), cookieOptions);
+
+                    context.Response.Cookies.Append("UserID", cookieValue, cookieOptions);
 
                 }
                 await next();

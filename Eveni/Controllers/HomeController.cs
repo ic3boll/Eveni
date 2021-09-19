@@ -18,14 +18,16 @@ namespace Web.Controllers
         private readonly IMapper _mapper;
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly IImageServices _imageServices;
+        private readonly IOrderServices _orderServices;
 
         public HomeController(IProductServices productServices,
             IMapper mapper,
             IViewModelServices viewModelServices,
             IHttpContextAccessor httpContextAccessor,
-            IImageServices imageServices)
+            IImageServices imageServices,
+            IOrderServices orderServices)
         {
-
+            this._orderServices = orderServices;
             this._productServices = productServices;
             this._mapper = mapper;
             this._viewModelServices = viewModelServices;
@@ -41,15 +43,18 @@ namespace Web.Controllers
 
             var ProductViewBag = _viewModelServices.SetProductCollection(products);
             var ImageViewBag = _viewModelServices.SetImageCollection(images);
+            var UserId = Request.Cookies["UserID"];
+            var UserOrders =await _orderServices.GetUserOrdersAsync(UserId);
+            var UserOrdersAsList = _viewModelServices.SetUserOrdersCollection(UserOrders);
 
             if (Request.Cookies["CookieCart"] != null)
             {
 
-                var CookiCart = JsonConvert.DeserializeObject<List<Item>>(Request.Cookies["CookieCart"]);
-                ViewBag.cart = CookiCart;
+                var CookieCart = JsonConvert.DeserializeObject<List<Item>>(Request.Cookies["CookieCart"]);
+                ViewBag.cart = CookieCart;
             }
 
-
+            ViewBag.userOrders = UserOrdersAsList;
             ViewData["Products"] = ProductViewBag;
             ViewData["Images"] = ImageViewBag;
 

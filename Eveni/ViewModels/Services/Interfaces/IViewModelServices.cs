@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Web.ViewModels.Images;
+using Web.ViewModels.Orders;
 using Web.ViewModels.Products;
 
 namespace Web.ViewModels.Services.Interfaces
@@ -14,7 +15,7 @@ namespace Web.ViewModels.Services.Interfaces
 
         public List<ImageViewModel> SetProductImageCollection(IReadOnlyCollection<Image> images, int id);
 
-
+        public List<OrderViewModel> SetUserOrdersCollection(IReadOnlyCollection<OrderViewModel> UserOrders);
         public List<ImageEditViewModel> EditProductImageCollection(IReadOnlyCollection<Image> images, int id);
     }
 }
