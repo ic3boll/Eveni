@@ -72,7 +72,7 @@ namespace Web.Services
         {
             var orders = await _orderRepository.GetAllAsync();
             var userOrders = orders.Where(u => u.CookieID == UserId).ToList().AsReadOnly();
-            var mappedUserOrders = _mapper.Map<IReadOnlyCollection<OrderViewModel>>(orders);
+            var mappedUserOrders = _mapper.Map<IReadOnlyCollection<OrderViewModel>>(userOrders);
             return mappedUserOrders;
         }
     }
