@@ -124,7 +124,6 @@ namespace Web
                     var cookieOptions = new CookieOptions()
                     {
                         Path = "/",
-                        Expires = DateTimeOffset.UtcNow.AddHours(1),
                         IsEssential = true,
                         HttpOnly = false,
                         Secure = false,

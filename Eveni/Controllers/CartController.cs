@@ -24,7 +24,7 @@ namespace Web.Controllers
             this._cookieHelper = cookieHelper;
             this._productServices = productServices;
         }
-        [Route("index")]
+        [Route("Your_Cart")]
         public IActionResult Index()
         {
           if(Request.Cookies["CookieCart"]==null)

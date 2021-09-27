@@ -1,20 +1,19 @@
-﻿using ApplicationCore.Entities;
-using ApplicationCore.Interfaces.Repositories;
-using Microsoft.AspNetCore.Mvc;
-using System;
+﻿using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
-using Web.Helpers.Interfaces;
 using Web.Models.Order;
 using Web.Services.Interfaces;
+using Web.ViewModels.Services.Interfaces;
 
 namespace Web.Controllers
 {
     public class OrderController : Controller
     {
         private readonly IOrderServices _orderServices;
-        public OrderController(IOrderServices orderServices)
+        private readonly IViewModelServices _viewModelServices;
+        public OrderController(IOrderServices orderServices, IViewModelServices viewModelServices)
         {
             this._orderServices = orderServices;
+            this._viewModelServices = viewModelServices;
         }
 
         public IActionResult Complete()
@@ -42,7 +41,12 @@ namespace Web.Controllers
 
         public async Task<IActionResult> UserOrder()
         {
-            return Ok();
+            var UserId = Request.Cookies["UserID"];
+            var UserOrders = await _orderServices.GetUserOrdersAsync(UserId);
+            var UserOrdersAsList = _viewModelServices.SetUserOrdersCollection(UserOrders);
+            ViewData["Orders"] = UserOrdersAsList;
+
+            return View();
         }
     }
 }
