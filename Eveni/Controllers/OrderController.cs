@@ -1,7 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using ApplicationCore.Entities;
+using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Web.Models.Order;
 using Web.Services.Interfaces;
+using Web.ViewModels.Orders;
 using Web.ViewModels.Services.Interfaces;
 
 namespace Web.Controllers
@@ -44,7 +48,16 @@ namespace Web.Controllers
             var UserId = Request.Cookies["UserID"];
             var UserOrders = await _orderServices.GetUserOrdersAsync(UserId);
             var UserOrdersAsList = _viewModelServices.SetUserOrdersCollection(UserOrders);
-            ViewData["Orders"] = UserOrdersAsList;
+           UserOrderViewModel Orders = new  UserOrderViewModel();
+            var asd = new List<UserOrderViewModel>();
+            foreach (var item in UserOrdersAsList)
+            {
+              Orders.items= JsonConvert.DeserializeObject<List<Item>>(item.Items);
+                asd.Add(Orders);
+                
+            }
+
+            ViewData["Orders"] = asd ;
 
             return View();
         }

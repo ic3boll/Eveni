@@ -1,13 +1,17 @@
 ﻿@using Web.ViewModels.Orders
 @{
 
-    var orders = (List<OrderViewModel>)ViewData["Orders"];
+    var orders = (List<UserOrderViewModel>)ViewData["Orders"];
 }
 
 <div>
     
     @foreach (var item in orders)
     {
-        <p>@item.CookieID</p>
+        @foreach (var asd in item.items)
+        {
+    <p>@asd.Product.Brand</p>
+        }
+
     }
 </div>
