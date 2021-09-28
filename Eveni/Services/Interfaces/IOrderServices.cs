@@ -12,5 +12,7 @@ namespace Web.Services.Interfaces
     {
         public Task CreateAsync(OrderDetailInputModel odim, string items, string CookieID);
         public Task<IReadOnlyCollection<OrderViewModel>> GetUserOrdersAsync(string UserId);
+
+        public List<UserOrderViewModel> DeserializeOrderItems(List<OrderViewModel> UserOrdersAsList);
     }
 }

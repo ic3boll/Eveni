@@ -8,9 +8,20 @@
     
     @foreach (var item in orders)
     {
+        
+        
         @foreach (var asd in item.items)
         {
-    <p>@asd.Product.Brand</p>
+            <table>
+                <tr>
+                    <th> Name: </th>
+                </tr>
+                <tr>
+                
+                    <td> @asd.Product.Brand</td>
+                </tr>
+            </table>
+    <p>@asd.Product.Id</p>
         }
 
     }

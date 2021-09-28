@@ -1,6 +1,7 @@
 ﻿using ApplicationCore.Entities;
 using ApplicationCore.Interfaces.Repositories;
 using AutoMapper;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,6 +9,7 @@ using System.Threading.Tasks;
 using Web.Helpers.Interfaces;
 using Web.Models.Order;
 using Web.Services.Interfaces;
+using Web.ViewModels.Item;
 using Web.ViewModels.Orders;
 
 namespace Web.Services
@@ -74,6 +76,20 @@ namespace Web.Services
             var userOrders = orders.Where(u => u.CookieID == UserId).ToList().AsReadOnly();
             var mappedUserOrders = _mapper.Map<IReadOnlyCollection<OrderViewModel>>(userOrders);
             return mappedUserOrders;
+        }
+
+        public List< UserOrderViewModel> DeserializeOrderItems(List<OrderViewModel> UserOrdersAsList)
+        {
+            UserOrderViewModel deserializedOrders = new UserOrderViewModel();
+            List<UserOrderViewModel> deserializedOrdersAsList = new List<UserOrderViewModel>();
+
+            foreach (var item in UserOrdersAsList)
+            {
+                deserializedOrders.items = JsonConvert.DeserializeObject<List<ItemViewModel>>(item.Items);
+                deserializedOrdersAsList.Add(deserializedOrders);
+            }
+
+            return deserializedOrdersAsList;
         }
     }
 }

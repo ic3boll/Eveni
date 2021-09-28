@@ -1,11 +1,14 @@
 ﻿using ApplicationCore.Entities;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Web.Models.Order;
 using Web.Services.Interfaces;
+using Web.ViewModels.Item;
 using Web.ViewModels.Orders;
+using Web.ViewModels.Products;
 using Web.ViewModels.Services.Interfaces;
 
 namespace Web.Controllers
@@ -14,10 +17,12 @@ namespace Web.Controllers
     {
         private readonly IOrderServices _orderServices;
         private readonly IViewModelServices _viewModelServices;
-        public OrderController(IOrderServices orderServices, IViewModelServices viewModelServices)
+        private readonly IMapper _mapper;
+        public OrderController(IOrderServices orderServices, IViewModelServices viewModelServices, IMapper mapper)
         {
             this._orderServices = orderServices;
             this._viewModelServices = viewModelServices;
+            this._mapper = mapper;
         }
 
         public IActionResult Complete()
@@ -46,20 +51,17 @@ namespace Web.Controllers
         public async Task<IActionResult> UserOrder()
         {
             var UserId = Request.Cookies["UserID"];
+
             var UserOrders = await _orderServices.GetUserOrdersAsync(UserId);
             var UserOrdersAsList = _viewModelServices.SetUserOrdersCollection(UserOrders);
-           UserOrderViewModel Orders = new  UserOrderViewModel();
-            var asd = new List<UserOrderViewModel>();
-            foreach (var item in UserOrdersAsList)
-            {
-              Orders.items= JsonConvert.DeserializeObject<List<Item>>(item.Items);
-                asd.Add(Orders);
-                
-            }
 
-            ViewData["Orders"] = asd ;
+           List< UserOrderViewModel> deserializedOrders = _orderServices.DeserializeOrderItems(UserOrdersAsList);
+
+            ViewData["Orders"] = deserializedOrders;
 
             return View();
         }
+
+     
     }
 }
