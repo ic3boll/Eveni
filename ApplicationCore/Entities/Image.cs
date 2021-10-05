@@ -9,6 +9,10 @@ namespace ApplicationCore.Entities
 {
    public class Image : BaseEntity
     {
+        public Image()
+        {
+
+        }
         public string ImageUrl { get; set; }
 
         public ImageEnum imageEnum { get; set; }

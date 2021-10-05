@@ -123,6 +123,9 @@ namespace Infrastructure.Data.Migrations
                     b.Property<int>("Order_DetailId")
                         .HasColumnType("int");
 
+                    b.Property<DateTime>("TimePlaced")
+                        .HasColumnType("datetime2");
+
                     b.HasKey("Id");
 
                     b.HasIndex("Order_DetailId");

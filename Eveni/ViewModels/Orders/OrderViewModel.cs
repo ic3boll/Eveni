@@ -12,6 +12,8 @@ namespace Web.ViewModels.Orders
 
         public string Items { get; set; }
 
+        public DateTime TimePlaced { get; set; }
+
         public Order_Detail Order_Detail { get; set; }
     }
 }

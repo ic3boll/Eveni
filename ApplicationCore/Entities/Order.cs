@@ -15,6 +15,7 @@ namespace ApplicationCore.Entities
 
         public string Items { get; set; } 
 
+        public DateTime TimePlaced { get; set; }
      //   public int? Order_Detail_ID { get; set; }
         public Order_Detail Order_Detail { get; set; }
     }

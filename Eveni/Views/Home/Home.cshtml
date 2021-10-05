@@ -6,7 +6,7 @@
     var images = (List<ImageViewModel>)ViewData["Images"];
     var fashion = CategoryEnum.Fashion;
     var imageEnumCheck = ImageEnum.Primary;
-
+    var c = 0;
     var data = TempData["Order"];
 
 
@@ -20,19 +20,23 @@
             <div class="col-sm-6 col-md-3">
                 <div class="thumbnail">
                     <label>Name: </label>
-
+                 @(c = 0)
                     @foreach (var imageItem in images.Where(i => i.Product.Id == item.Id))
                     {
+
 
                         @if (imageItem.imageEnum.Equals(imageEnumCheck))
                         {
                             <img src=" @imageItem.ImageUrl" style="width:30%">
-
+                            c = c + 1;
                         }
 
                     }
-                    <img src="/images/Logo.2.jpg" style="width:100%">
+                    @if (c < 1)
+                    {
 
+                        <img src="/images/Logo.2.jpg" style="width:100%">
+                    }
                     <h4>@item.Name </h4>
                     <a asp-controller="Product" asp-action="Index" asp-route-id="@item.Id" class="btn btn-primary">Details</a>
                     <a asp-controller="Cart" asp-action="Index" asp-route-id="@item.Id" class="btn btn-primary">Cart</a>

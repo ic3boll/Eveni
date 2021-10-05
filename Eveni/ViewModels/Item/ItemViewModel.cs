@@ -11,5 +11,7 @@ namespace Web.ViewModels.Item
         public ProductViewModel Product { get; set; }
 
         public int Quantity { get; set; }
+
+        public DateTime TimePlaced { get; set; }
     }
 }

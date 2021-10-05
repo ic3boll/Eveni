@@ -5,24 +5,24 @@
 }
 
 <div>
-    
-    @foreach (var item in orders)
-    {
-        
-        
-        @foreach (var asd in item.items)
-        {
-            <table>
-                <tr>
-                    <th> Name: </th>
-                </tr>
-                <tr>
-                
-                    <td> @asd.Product.Brand</td>
-                </tr>
-            </table>
-    <p>@asd.Product.Id</p>
-        }
 
+    @foreach (var user in orders)
+    {
+        <table>
+            <tr>
+                <th> Name: </th>
+            </tr>
+            <tr>
+                <td> @user.items.Product.Brand</td>
+            </tr>
+            <tr>
+                <th>
+                    Order Placed:
+                </th>
+            </tr>
+            <tr>
+                <td>  @user.items.TimePlaced </td>
+            </tr>
+        </table>
     }
 </div>

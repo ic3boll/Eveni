@@ -10,6 +10,6 @@ namespace Web.ViewModels.Orders
 {
     public class UserOrderViewModel
     {
-        public List<ItemViewModel> items { get; set; }
+        public ItemViewModel items { get; set; }
     }
 }

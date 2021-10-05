@@ -31,7 +31,7 @@ namespace Web.Controllers
         }
         [HttpPost]
         public async Task<IActionResult> Complete(OrderDetailInputModel orderDetailInput)
-            {
+        {
             if (ModelState.IsValid)
             {
                 var items = Request.Cookies["CookieCart"];
@@ -42,7 +42,7 @@ namespace Web.Controllers
                 var UserId = Request.Cookies["UserID"];
 
 
-               await _orderServices.CreateAsync(orderDetailInput, items, UserId);
+                await _orderServices.CreateAsync(orderDetailInput, items, UserId);
             }
             return Ok();
 
@@ -53,15 +53,15 @@ namespace Web.Controllers
             var UserId = Request.Cookies["UserID"];
 
             var UserOrders = await _orderServices.GetUserOrdersAsync(UserId);
-            var UserOrdersAsList = _viewModelServices.SetUserOrdersCollection(UserOrders);
+            var UserOrdersAsList =  _viewModelServices.SetUserOrdersCollection(UserOrders);
 
-           List< UserOrderViewModel> deserializedOrders = _orderServices.DeserializeOrderItems(UserOrdersAsList);
+            var deserializedOrders = _orderServices.DeserializeOrderItems(UserOrdersAsList);
 
-            ViewData["Orders"] = deserializedOrders;
+            ViewData["Orders"] =  deserializedOrders;
 
             return View();
         }
 
-     
+
     }
 }

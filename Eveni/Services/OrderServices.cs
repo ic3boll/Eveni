@@ -44,7 +44,8 @@ namespace Web.Services
             {
                 Order_Detail = order_Detail,
                 CookieID = UserId,
-                Items = items
+                Items = items,
+                TimePlaced = DateTime.Now
             };
             foreach (var item in ip)
             {
@@ -75,17 +76,24 @@ namespace Web.Services
             var orders = await _orderRepository.GetAllAsync();
             var userOrders = orders.Where(u => u.CookieID == UserId).ToList().AsReadOnly();
             var mappedUserOrders = _mapper.Map<IReadOnlyCollection<OrderViewModel>>(userOrders);
+
             return mappedUserOrders;
         }
 
         public List< UserOrderViewModel> DeserializeOrderItems(List<OrderViewModel> UserOrdersAsList)
         {
-            UserOrderViewModel deserializedOrders = new UserOrderViewModel();
+            
             List<UserOrderViewModel> deserializedOrdersAsList = new List<UserOrderViewModel>();
 
             foreach (var item in UserOrdersAsList)
             {
-                deserializedOrders.items = JsonConvert.DeserializeObject<List<ItemViewModel>>(item.Items);
+                var deserializedOrders = new UserOrderViewModel();
+               var itemToAdd = JsonConvert.DeserializeObject<List<ItemViewModel>>(item.Items);
+                foreach (var items in itemToAdd)
+                {
+                    deserializedOrders.items = items;
+                    deserializedOrders.items.TimePlaced = item.TimePlaced;
+                }
                 deserializedOrdersAsList.Add(deserializedOrders);
             }
 
