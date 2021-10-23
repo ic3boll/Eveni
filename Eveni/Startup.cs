@@ -84,18 +84,18 @@ namespace Web
       .AddDefaultTokenProviders()
       .AddEntityFrameworkStores<EveniDbContext>();
 
-
+            services.AddMemoryCache();
             services.AddAuthentication()
                 .AddIdentityServerJwt();
             services.AddControllersWithViews();
             services.AddRazorPages();
 
 
-            // In production, the Angular files will be served from this directory
-            services.AddSpaStaticFiles(configuration =>
-            {
-                configuration.RootPath = "ClientApp/dist";
-            });
+         // // In production, the Angular files will be served from this directory
+         // services.AddSpaStaticFiles(configuration =>
+         // {
+         //     configuration.RootPath = "ClientApp/dist";
+         // });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -1,18 +1,18 @@
 ﻿@using Web.ViewModels.Products
 @using ApplicationCore.Entities.Enums
 @using Web.ViewModels.Images
+@model ProductImageViewModel
 @{
-    var products = (List<ProductViewModel>)ViewData["Products"];
-    var images = (List<ImageViewModel>)ViewData["Images"];
     var fashion = CategoryEnum.Fashion;
     var imageEnumCheck = ImageEnum.Primary;
     var c = 0;
-    var data = TempData["Order"];
+    var time = ViewBag.totaltime;
 
 
 }
+<h1>@time</h1>
 
-@foreach (var item in products)
+@foreach (var item in Model.Products)
 {
     if (item.Category.Equals(fashion))
     {
@@ -21,7 +21,7 @@
                 <div class="thumbnail">
                     <label>Name: </label>
                  @(c = 0)
-                    @foreach (var imageItem in images.Where(i => i.Product.Id == item.Id))
+                    @foreach (var imageItem in Model.Images.Where(i => i.Product.Id == item.Id))
                     {
 
 
