@@ -42,6 +42,7 @@ namespace Web
             services.AddScoped(typeof(IImageHelper), typeof(ImageHelper));
             services.AddScoped(typeof(IImageServices), typeof(ImageServices));
             services.AddScoped(typeof(ICookieHelper), typeof(CookieHelper));
+            services.AddScoped(typeof(IViewModelServices), typeof(ViewModelServices));
 
             services.AddAutoMapper(typeof(Startup));
             services.AddControllersWithViews();

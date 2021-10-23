@@ -46,29 +46,20 @@ namespace Web.Controllers
         {
             Stopwatch sw = new Stopwatch();
             sw.Start();
-            ProductImageViewModel Products = new ProductImageViewModel();
+            ProductImageViewModel ProductsToAdd = new ProductImageViewModel();
             bool Exist = _cache.TryGetValue("CacheTime", out ProductImageViewModel model);
             if (!Exist)
             {
-                var products = await this._productServices.GetAllAsync();
-                var images = await this._imageServices.GetAllAsync();
-
-                var ListOfProcucts = _viewModelServices.SetProductCollection(products);
-                var ListOfImages = _viewModelServices.SetImageCollection(images);
-
-
-                Products.Products.AddRange(ListOfProcucts);
-                Products.Images.AddRange(ListOfImages);
-                _cache.Set("CacheTime", Products, new MemoryCacheEntryOptions().SetSlidingExpiration(TimeSpan.FromSeconds(60)));
+                var Products = await _viewModelServices.GetProducts(ProductsToAdd);
                 sw.Stop();
                 ViewBag.totaltime = sw.Elapsed;
                 return View(Products);
 
             }
-            Products = _cache.Get<ProductImageViewModel>("CacheTime");
+            ProductsToAdd = _cache.Get<ProductImageViewModel>("CacheTime");
             sw.Stop();
             ViewBag.totaltime = sw.Elapsed;
-            return View(Products);
+            return View(ProductsToAdd);
         }
 
     }
