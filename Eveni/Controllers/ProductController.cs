@@ -70,7 +70,7 @@ namespace Web.Controllers
         public async Task<IActionResult> Edit(int id)
         {
             var productId = await _productServices.GetIdAsync(id);
-            var images = await _imageServices.GetProductImage(id);
+            var images = await _imageServices.GetAllAsync();
 
             var productViewModel = _mapper.Map<ProductEditViewModel>(productId);
             var productImage = _viewModelServices.EditProductImageCollection(images, id);

@@ -15,16 +15,12 @@ namespace Web.Services
         private readonly IAsyncRepository<Product> _productRepository;
         private readonly IAsyncRepository<Image> _imageRepository;
         private readonly IMapper _mapper;
-        private readonly IImageHelper _imageHelper;
-
         public ProductServices(IAsyncRepository<Product> productRepository,
             IMapper mapper,
-            IImageHelper imageHelper,
             IAsyncRepository<Image> imageRepository)
         {
             _productRepository = productRepository;
             _mapper = mapper;
-            _imageHelper = imageHelper;
             _imageRepository = imageRepository;
         }
 

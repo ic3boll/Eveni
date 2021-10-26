@@ -13,12 +13,9 @@ namespace Web.Services
     public class ImageServices : IImageServices
     {
         private readonly IAsyncRepository<Image> _imageRepository;
-        private readonly IMapper _mapper;
-        public ImageServices(IAsyncRepository<Image> imageRepository,
-            IMapper mapper)
+        public ImageServices(IAsyncRepository<Image> imageRepository)
         {
             this._imageRepository = imageRepository;
-            this._mapper = mapper;
         }
 
         public async Task<IReadOnlyCollection<Image>> GetAllAsync()
@@ -26,12 +23,6 @@ namespace Web.Services
             var images = await this._imageRepository.GetAllAsync();
             
             return images;
-        }
-
-        public async Task<IReadOnlyCollection<Image>> GetProductImage(int id)
-        {
-            var image = await this._imageRepository.GetAllAsync();
-            return image;
         }
 
         public async Task RemoveImage(int id)

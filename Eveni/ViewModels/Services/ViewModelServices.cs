@@ -85,13 +85,13 @@ namespace Web.ViewModels.Services
             return listOfUserOrders;
         }
 
-        public async Task<ProductImageViewModel> GetProducts(ProductImageViewModel Product)
+        public async Task<ProductImageViewModel> SetProductsToCache(ProductImageViewModel Product)
         {
-            var GetProducts = await this._productServices.GetAllAsync();
-            var images = await this._imageServices.GetAllAsync();
+            var GetProductsFromDb = await this._productServices.GetAllAsync();
+            var GetImagesFromDb = await this._imageServices.GetAllAsync();
 
-            var ListOfProcucts = SetProductCollection(GetProducts);
-            var ListOfImages = SetImageCollection(images);
+            var ListOfProcucts = SetProductCollection(GetProductsFromDb);
+            var ListOfImages = SetImageCollection(GetImagesFromDb);
 
 
             Product.Products.AddRange(ListOfProcucts);

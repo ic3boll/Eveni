@@ -18,6 +18,6 @@ namespace Web.ViewModels.Services.Interfaces
         public List<OrderViewModel> SetUserOrdersCollection(IReadOnlyCollection<OrderViewModel> UserOrders);
         public List<ImageEditViewModel> EditProductImageCollection(IReadOnlyCollection<Image> images, int id);
 
-        public Task<ProductImageViewModel> GetProducts(ProductImageViewModel Product);
+        public Task<ProductImageViewModel> SetProductsToCache(ProductImageViewModel Product);
     }
 }

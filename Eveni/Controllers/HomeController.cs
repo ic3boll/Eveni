@@ -47,13 +47,13 @@ namespace Web.Controllers
             Stopwatch sw = new Stopwatch();
             sw.Start();
             ProductImageViewModel ProductsToAdd = new ProductImageViewModel();
-            bool Exist = _cache.TryGetValue("CacheTime", out ProductImageViewModel model);
-            if (!Exist)
-            {
-                var Products = await _viewModelServices.GetProducts(ProductsToAdd);
+            if(! _cache.TryGetValue("CacheTime", out ProductImageViewModel products))
+            { 
+         
+                products = await _viewModelServices.SetProductsToCache(ProductsToAdd);
                 sw.Stop();
                 ViewBag.totaltime = sw.Elapsed;
-                return View(Products);
+                return View(products);
 
             }
             ProductsToAdd = _cache.Get<ProductImageViewModel>("CacheTime");
